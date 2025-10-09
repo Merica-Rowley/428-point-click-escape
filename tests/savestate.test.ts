@@ -8,10 +8,10 @@ const knexConfig: any = (rawKnexConfig as any).default ?? rawKnexConfig;
 
 const knex: Knex = knexModule(knexConfig.development);
 
-describe("Inventory Table", () => {
+describe("Save_State Table", () => {
   // 🔹 Before each test: clean out the inventory table
   beforeEach(async () => {
-    await knex("inventory").del();
+    await knex("save_state").del();
   });
 
   // 🔹 After all tests: close DB connection so Jest can exit cleanly
@@ -19,33 +19,33 @@ describe("Inventory Table", () => {
     await knex.destroy();
   });
 
-  test("can insert and fetch an inventory item", async () => {
+  test("can insert and fetch a save_state item", async () => {
     // 🔹 Insert a new row into the inventory table
-    const inserted = await knex("inventory")
+    const inserted = await knex("save_state")
       .insert({
-        player_id: 1,
-        item_name: "Key",
-        quantity: 2,
+        room: "A very scary room",
+        inventory: "Lotsa stuff",
+        world_state: "A tragic one",
       })
-      .returning(["id", "player_id", "item_name", "quantity"]);
+      .returning(["room", "inventory", "world_state"]);
 
     // "inserted" will be an array of objects from PostgreSQL
     const item = inserted[0];
 
     // 🔹 Assert that the returned row looks correct
     expect(item).toMatchObject({
-      player_id: 1,
-      item_name: "Key",
-      quantity: 2,
+      room: "A very scary room",
+      inventory: "Lotsa stuff",
+      world_state: "A tragic one",
     });
 
     // 🔹 Fetch directly from DB to double check
-    const fetched = await knex("inventory").where({ id: item.id }).first();
+    const fetched = await knex("save_state").where({ room: "A very scary room" }).first();
 
     expect(fetched).toMatchObject({
-      player_id: 1,
-      item_name: "Key",
-      quantity: 2,
+      room: "A very scary room",
+      inventory: "Lotsa stuff",
+      world_state: "A tragic one",
     });
   });
 });
