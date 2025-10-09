@@ -22,3 +22,5 @@ const config: { [key: string]: Knex.Config } = {
 
 export default config; // 👈 important
 
+// Quick test for commits
+
