@@ -1,5 +1,5 @@
 import knexModule, { Knex } from "knex";
-import * as rawKnexConfig from "../knexfile"; // works with TS/JS knexfile
+import * as rawKnexConfig from "../../knexfile"; // works with TS/JS knexfile
 
 // Normalize the import so it works whether the knexfile uses `export default` (ESM)
 // or `module.exports` (CommonJS). Some environments (ts-jest) need

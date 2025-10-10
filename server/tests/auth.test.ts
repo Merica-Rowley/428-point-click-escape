@@ -1,5 +1,5 @@
 import knexModule, { Knex } from "knex";
-import * as rawKnexConfig from "../knexfile"; // works with TS/JS knexfile
+import * as rawKnexConfig from "../../knexfile"; // works with TS/JS knexfile
 
 // Normalize the import so it works whether the knexfile uses `export default` (ESM)
 // or `module.exports` (CommonJS). Some environments (ts-jest) need
@@ -8,10 +8,10 @@ const knexConfig: any = (rawKnexConfig as any).default ?? rawKnexConfig;
 
 const knex: Knex = knexModule(knexConfig.development);
 
-describe("Inventory Table", () => {
+describe("Auth Table", () => {
   // 🔹 Before each test: clean out the inventory table
   beforeEach(async () => {
-    await knex("inventory").del();
+    await knex("auth_table").del();
   });
 
   // 🔹 After all tests: close DB connection so Jest can exit cleanly
@@ -19,33 +19,27 @@ describe("Inventory Table", () => {
     await knex.destroy();
   });
 
-  test("can insert and fetch an inventory item", async () => {
-    // 🔹 Insert a new row into the inventory table
-    const inserted = await knex("inventory")
+  test("can insert a username into auth table", async () => {
+    // 🔹 Insert a new row into the auth table
+    const inserted = await knex("auth_table")
       .insert({
-        player_id: 1,
-        item_name: "Key",
-        quantity: 2,
+        username: "test_user",
       })
-      .returning(["id", "player_id", "item_name", "quantity"]);
+      .returning(["username"]);
 
     // "inserted" will be an array of objects from PostgreSQL
     const item = inserted[0];
 
     // 🔹 Assert that the returned row looks correct
     expect(item).toMatchObject({
-      player_id: 1,
-      item_name: "Key",
-      quantity: 2,
+      username: "test_user",
     });
 
     // 🔹 Fetch directly from DB to double check
-    const fetched = await knex("inventory").where({ id: item.id }).first();
+    const fetched = await knex("auth_table").where({ username: "test_user" }).first();
 
     expect(fetched).toMatchObject({
-      player_id: 1,
-      item_name: "Key",
-      quantity: 2,
+      username: "test_user",
+    });
     });
   });
-});
