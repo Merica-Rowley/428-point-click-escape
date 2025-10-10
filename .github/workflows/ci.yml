@@ -30,7 +30,7 @@ jobs:
       - name: Update pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: client/dist/assets
+          path: client/dist/
   deploy:
     needs: build
     permissions:
