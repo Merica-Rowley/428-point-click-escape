@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { Pool } from "pg";
@@ -7,12 +7,13 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Use Pool from 'pg' directly, which has the 'query' method
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL, // or manual host/user/password
-});
+}) as unknown as { query: (text: string, params?: any[]) => Promise<any> };
 
 // ✅ Register new user
-app.post("/auth/register", async (req, res) => {
+app.post("/auth/register", async (req: Request, res: Response) => {
   const { name } = req.body;
 
   if (!name) return res.status(400).json({ error: "Name is required" });
@@ -37,7 +38,7 @@ app.post("/auth/register", async (req, res) => {
   }
 });
 
-app.post("/auth/login", async (req, res) => {
+app.post("/auth/login", async (req: Request, res: Response) => {
   const { name } = req.body;
 
   if (!name) return res.status(400).json({ error: "Name is required" });

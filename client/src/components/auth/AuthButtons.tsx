@@ -7,7 +7,7 @@ export default function AuthButtons() {
   const navigate = useNavigate();
 
   const handleSignIn = async () => {
-    await signIn();
+    await signIn(user!.name);
     navigate("/game", { replace: true });
   };
 

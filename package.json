@@ -18,12 +18,17 @@
   },
   "homepage": "https://github.com/Merica-Rowley/428-point-click-escape#readme",
   "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
+    "express": "^5.1.0",
     "knex": "^3.1.0",
     "pg": "^8.16.3"
   },
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
+    "@types/node": "^24.7.1",
     "jest": "^30.2.0",
     "ts-jest": "^29.4.4",
     "typescript": "^5.9.3"

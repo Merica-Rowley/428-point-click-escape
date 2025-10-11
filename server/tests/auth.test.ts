@@ -1,5 +1,6 @@
 import knexModule, { Knex } from "knex";
 import * as rawKnexConfig from "../../knexfile"; // works with TS/JS knexfile
+import { id } from "../../jest.config";
 
 // Normalize the import so it works whether the knexfile uses `export default` (ESM)
 // or `module.exports` (CommonJS). Some environments (ts-jest) need
@@ -23,15 +24,17 @@ describe("Auth Table", () => {
     // 🔹 Insert a new row into the auth table
     const inserted = await knex("auth_table")
       .insert({
+        id: 1,
         username: "test_user",
       })
-      .returning(["username"]);
+      .returning(["id", "username"]);
 
     // "inserted" will be an array of objects from PostgreSQL
     const item = inserted[0];
 
     // 🔹 Assert that the returned row looks correct
     expect(item).toMatchObject({
+      id: 1,
       username: "test_user",
     });
 
@@ -39,6 +42,7 @@ describe("Auth Table", () => {
     const fetched = await knex("auth_table").where({ username: "test_user" }).first();
 
     expect(fetched).toMatchObject({
+      id: 1,
       username: "test_user",
     });
     });
