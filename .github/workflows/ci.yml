@@ -20,12 +20,15 @@ jobs:
         with:
           node-version: "22.x"
 
-      - name: Build
+      - name: Build frontend
+        working-directory: client
         run: |
           npm ci
-          cd client
-          npm ci && npm run build
+          npm run build
           cp dist/index.html dist/404.html
+
+      - name: List dist contents
+        run: ls -R client/dist
 
       - name: Update pages artifact
         uses: actions/upload-pages-artifact@v3
