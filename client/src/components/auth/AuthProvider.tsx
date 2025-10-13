@@ -11,7 +11,7 @@ type User = { id: string; name: string };
 type AuthContextType = {
   user: User | null;
   isAuthenticated: boolean;
-  signIn: (name: string) => Promise<void>;
+  signIn: (next: User) => Promise<void>;
   signOut: () => Promise<void>;
   register: (name: string) => Promise<void>;
 };
