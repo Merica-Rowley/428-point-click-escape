@@ -25,27 +25,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return raw ? (JSON.parse(raw) as User) : null;
   });
 
-  const signIn = async (name: string) => {
+  const signIn = async (next: User) => {
     // stubbed: pretend an auth flow succeeded
-    // const demoUser = next ?? { id: "u_123", name: "Demo Player" };
-    // setUser(demoUser);
-    // localStorage.setItem(STORAGE_KEY, JSON.stringify(demoUser));
+    const demoUser = next ?? { id: "u_123", name: "Demo Player" };
+    setUser(demoUser);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(demoUser));
 
     // Trying to connect to backend
-      const res = await fetch(`http://localhost:3001/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
-    });
+    //   const res = await fetch(`http://localhost:3001/auth/login`, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ name }),
+    // });
 
-    if (!res.ok) {
-      const data = await res.json();
-      throw new Error(data.error || "Failed to login");
-    }
+    // if (!res.ok) {
+    //   const data = await res.json();
+    //   throw new Error(data.error || "Failed to login");
+    // }
 
-    const user = await res.json();
-    setUser(user);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+    // const user = await res.json();
+    // setUser(user);
+    // localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
   };
 
   const signOut = async () => {
