@@ -8,6 +8,7 @@ export default function AuthButtons() {
 
   const handleSignIn = async () => {
     await signIn(user!);
+    // Make sure this goes to the backend branch.
     navigate("/game", { replace: true });
   };
 
