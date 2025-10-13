@@ -4,7 +4,7 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import { AuthProvider } from "./components/auth/AuthProvider";
 import RequireAuth from "./components/auth/RequireAuth";
-import Game from "./pages/Game";
+import Game from "./pages/Game/Game";
 
 function App() {
   return (

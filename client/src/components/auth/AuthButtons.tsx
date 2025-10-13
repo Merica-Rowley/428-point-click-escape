@@ -12,12 +12,7 @@ export default function AuthButtons() {
   };
 
   return isAuthenticated ? (
-    <div>
-      <p>
-        Signed in as <strong>{user?.name}</strong>
-      </p>
-      <button onClick={() => signOut()}>Sign out</button>
-    </div>
+    <button onClick={() => signOut()}>Sign out</button>
   ) : (
     <button onClick={handleSignIn}>Sign in</button>
   );
