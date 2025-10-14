@@ -7,9 +7,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Use Pool from 'pg' directly, which has the 'query' method
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // or manual host/user/password
+  connectionString: "postgresql://postgres:curr_password@localhost:5432/escape_game" // or manual host/user/password
 }) as unknown as { query: (text: string, params?: any[]) => Promise<any> };
 
 // ✅ Register new user
@@ -27,7 +26,7 @@ app.post("/auth/register", async (req: Request, res: Response) => {
 
     // Insert user
     const result = await pool.query(
-      "INSERT INTO auth_table (username) VALUES ($1)"
+      "INSERT INTO auth_table (username) VALUES ($1) RETURNING *",
       [name]
     );
 

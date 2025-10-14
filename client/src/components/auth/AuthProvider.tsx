@@ -7,13 +7,13 @@ import {
 } from "react";
 
 //TODO: Improve context types to reflect auth table and also world state table
-type User = { id: string; name: string };
+type User = { id: string | number ; username: string };
 type AuthContextType = {
   user: User | null;
   isAuthenticated: boolean;
-  signIn: (next: User) => Promise<void>;
+  signIn: (name: string) => Promise<void>;
   signOut: () => Promise<void>;
-  register: (name: string) => Promise<void>;
+  register: (name: string) => Promise<string>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -25,27 +25,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return raw ? (JSON.parse(raw) as User) : null;
   });
 
-  const signIn = async (next: User) => {
+  const signIn = async (name: string) => {
     // stubbed: pretend an auth flow succeeded
-    const demoUser = next ?? { id: "u_123", name: "Demo Player" };
-    setUser(demoUser);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(demoUser));
+    // const demoUser = next ?? { id: "u_123", name: "Demo Player" };
+    // setUser(demoUser);
+    // localStorage.setItem(STORAGE_KEY, JSON.stringify(demoUser));
 
     // Trying to connect to backend
-    //   const res = await fetch(`http://localhost:3001/auth/login`, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ name }),
-    // });
+      const res = await fetch(`http://localhost:3001/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name }),
+    });
 
-    // if (!res.ok) {
-    //   const data = await res.json();
-    //   throw new Error(data.error || "Failed to login");
-    // }
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Failed to login");
+    }
 
-    // const user = await res.json();
-    // setUser(user);
-    // localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+    const user = await res.json();
+    setUser(user);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+    console.log("the user is here ... ", user)
+    return user
   };
 
   const signOut = async () => {
@@ -68,6 +70,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const user = await res.json();
     setUser(user);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+    return JSON.stringify(user);
   }
 
   const value = useMemo<AuthContextType>(
