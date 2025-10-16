@@ -55,4 +55,52 @@ app.post("/auth/login", async (req: Request, res: Response) => {
   }
 });
 
+app.post("/game/inventory", async (req: Request, res: Response) => {
+  const { name } = req.body;
+
+  try {
+    const result = await pool.query("SELECT inventory FROM save_state WHERE username = $1", [name]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Inventory for given user not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database error" });
+  }
+});
+
+app.post("/game/room", async (req: Request, res: Response) => {
+  const { name } = req.body;
+
+  try {
+    const result = await pool.query("SELECT room FROM save_state WHERE username = $1", [name]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Game for given user not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database error" });
+  }
+});
+
+app.post("/game/state", async (req: Request, res: Response) => {
+  const { name } = req.body;
+
+  try {
+    const result = await pool.query("SELECT world_state FROM save_state WHERE username = $1", [name]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "World State for given user not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database error" });
+  }
+});
+
 app.listen(3001, () => console.log("Server running on http://localhost:3001"));

@@ -4,7 +4,8 @@
  */
 exports.up = function(knex) {
   return knex.schema.createTable('save_state', (table) => {
-    table.string('room').primary();      
+    table.string('username').primary();
+    table.string('room').notNullable();      
     table.string('inventory').notNullable();
     table.string('world_state').notNullable();
     table.timestamps(true, true);          // created_at and updated_at
