@@ -11,7 +11,6 @@ const pool = new Pool({
   connectionString: "postgresql://postgres:curr_password@localhost:5432/escape_game" // or manual host/user/password
 }) as unknown as { query: (text: string, params?: any[]) => Promise<any> };
 
-// ✅ Register new user
 app.post("/auth/register", async (req: Request, res: Response) => {
   const { name } = req.body;
 
@@ -37,7 +36,7 @@ app.post("/auth/register", async (req: Request, res: Response) => {
   }
 });
 
-app.post("/auth/login", async (req: Request, res: Response) => {
+app.get("/auth/login", async (req: Request, res: Response) => {
   const { name } = req.body;
 
   if (!name) return res.status(400).json({ error: "Name is required" });
@@ -55,7 +54,7 @@ app.post("/auth/login", async (req: Request, res: Response) => {
   }
 });
 
-app.post("/game/inventory", async (req: Request, res: Response) => {
+app.get("/game/inventory", async (req: Request, res: Response) => {
   const { name } = req.body;
 
   try {
@@ -71,7 +70,7 @@ app.post("/game/inventory", async (req: Request, res: Response) => {
   }
 });
 
-app.post("/game/room", async (req: Request, res: Response) => {
+app.get("/game/room", async (req: Request, res: Response) => {
   const { name } = req.body;
 
   try {
@@ -87,7 +86,7 @@ app.post("/game/room", async (req: Request, res: Response) => {
   }
 });
 
-app.post("/game/state", async (req: Request, res: Response) => {
+app.get("/game/state", async (req: Request, res: Response) => {
   const { name } = req.body;
 
   try {
