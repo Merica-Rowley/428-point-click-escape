@@ -1,0 +1,19 @@
+.background-container {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  .keyButton {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 65%;
+    left: 85%;
+  }
+}
+
+.bg-one {
+  background-image: url("../../assets/Screen1/bg1.png");
+}
