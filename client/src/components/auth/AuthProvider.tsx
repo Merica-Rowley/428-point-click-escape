@@ -18,6 +18,7 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const STORAGE_KEY = "demo_auth_user";
+const BASE_URL = "https://four28-point-click-escape.onrender.com";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => {
@@ -32,7 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // localStorage.setItem(STORAGE_KEY, JSON.stringify(demoUser));
 
     // Trying to connect to backend
-      const res = await fetch(`http://localhost:3001/auth/login`, {
+      const res = await fetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name }),
@@ -56,7 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const register = async (name: string) => {
-    const res = await fetch(`http://localhost:3001/auth/register`, {
+    const res = await fetch(`${BASE_URL}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name }),
