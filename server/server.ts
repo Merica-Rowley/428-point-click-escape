@@ -2,13 +2,15 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { Pool } from "pg";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
 const pool = new Pool({
-  connectionString: "postgresql://postgres:curr_password@localhost:5432/escape_game" // or manual host/user/password
+  connectionString: process.env.DATABASE_URL
 }) as unknown as { query: (text: string, params?: any[]) => Promise<any> };
 
 app.post("/auth/register", async (req: Request, res: Response) => {
