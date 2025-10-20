@@ -13,6 +13,10 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 }) as unknown as { query: (text: string, params?: any[]) => Promise<any> };
 
+app.get("/", (req: Request, res: Response) => {
+  res.send("Backend is running! 🎉");
+});
+
 app.post("/auth/register", async (req: Request, res: Response) => {
   const { name } = req.body;
 
