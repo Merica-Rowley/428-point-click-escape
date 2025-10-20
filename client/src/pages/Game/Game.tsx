@@ -4,13 +4,25 @@ import GameScreen from "../../components/GameScreen/Screen";
 import Inventory from "../../components/Inventory/Inventory";
 import "./Game.css";
 
+export type item = {
+  name: string;
+};
+
 export default function Game() {
-  const [inventory, setInventory] = useState({
-    key: false,
-  });
+  const allItems: item[] = [{ name: "key" }] as const;
+
+  const [inventory, setInventory] = useState<item[]>([]);
+  const [selectedItem, setSelectedItem] = useState<string>("");
 
   const pickUpItem = (itemName: string) => {
-    setInventory((prev) => ({ ...prev, [itemName]: true }));
+    // Only add if inventory not full
+    if (inventory.length < 5) {
+      setInventory([...inventory, { name: itemName }]);
+    }
+  };
+
+  const selectItem = (selectedItem: string) => {
+    setSelectedItem(selectedItem);
   };
 
   return (
@@ -20,8 +32,12 @@ export default function Game() {
         <AuthButtons />
       </div>
       <div className="game-window">
-        <GameScreen inventory={inventory} onPickUpItem={pickUpItem} />
-        <Inventory />
+        <GameScreen
+          inventory={inventory}
+          onPickUpItem={pickUpItem}
+          selectedItem={selectedItem}
+        />
+        <Inventory inventory={inventory} selectItem={selectItem} />
       </div>
     </div>
   );

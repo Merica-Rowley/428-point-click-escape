@@ -5,12 +5,20 @@
   background-position: center;
   position: relative;
 
-  .keyButton {
+  button {
     background-color: transparent;
     border: none;
     position: absolute;
+  }
+
+  .keyButton {
     top: 65%;
     left: 85%;
+  }
+
+  .doorButton {
+    top: 25%;
+    left: 20%;
   }
 }
 
