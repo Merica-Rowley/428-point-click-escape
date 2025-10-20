@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx server/server.ts",
+    "build": "tsc",
     "test": "jest",
     "start": "tsx server/server.ts"
   },
