@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     // Trying to connect to backend
       const res = await fetch(`${BASE_URL}/auth/login`, {
-      method: "POST",
+      method: "GET",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name }),
     });
