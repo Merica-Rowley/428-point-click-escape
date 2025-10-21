@@ -10,8 +10,15 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
-}) as unknown as { query: (text: string, params?: any[]) => Promise<any> };
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+pool.query("SELECT NOW()")
+  .then(res => console.log("DB connected:", res.rows[0]))
+  .catch(err => console.error("DB connection failed:", err));
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Backend is running! 🎉");
