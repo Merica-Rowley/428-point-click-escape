@@ -18,9 +18,20 @@ const config: { [key: string]: Knex.Config } = {
       directory: "./migrations",
     },
   },
+
+  // 👇 Add this block for Render
+  production: {
+    client: "pg",
+    connection: {
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false }, // Required for Render Postgres
+    },
+    migrations: {
+      directory: "./migrations",
+    },
+  },
 };
 
-export default config; // 👈 important
+export default config;
 
-// Quick test for commits
 
