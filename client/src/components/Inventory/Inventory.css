@@ -1,0 +1,5 @@
+.inventory-box {
+  .selected-item {
+    background-color: gold;
+  }
+}

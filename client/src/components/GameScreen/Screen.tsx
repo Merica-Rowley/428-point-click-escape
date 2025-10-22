@@ -32,7 +32,7 @@ export default function GameScreen(props: {
         <img src={door} alt="door" />
       </button>
 
-      {showWin && <h1>YOU WIN</h1>}
+      {showWin && <h1 className="win-text">YOU WIN</h1>}
     </div>
   );
 }
