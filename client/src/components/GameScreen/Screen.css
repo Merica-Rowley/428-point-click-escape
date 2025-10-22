@@ -17,11 +17,23 @@
   }
 
   .doorButton {
-    top: 25%;
+    top: 32%;
     left: 20%;
   }
 }
 
 .bg-one {
   background-image: url("../../assets/Screen1/bg1.png");
+}
+
+.win-text {
+  color: gold;
+  background-color: blue;
+  max-width: 170px;
+  position: absolute;
+  top: 30%;
+  left: 45%;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
