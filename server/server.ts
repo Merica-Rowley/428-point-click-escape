@@ -27,6 +27,8 @@ app.get("/", (req: Request, res: Response) => {
 app.post("/auth/register", async (req: Request, res: Response) => {
   const { name } = req.body;
 
+  console.log("Registering user cause we in the register api:", name);
+
   if (!name) return res.status(400).json({ error: "Name is required" });
 
   try {
@@ -51,6 +53,8 @@ app.post("/auth/register", async (req: Request, res: Response) => {
 
 app.post("/auth/login", async (req: Request, res: Response) => {
   const { name } = req.body;
+
+  console.log("Logging in user in the login api:", name);
 
   if (!name) return res.status(400).json({ error: "Name is required" });
 
