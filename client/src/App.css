@@ -1,1 +1,30 @@
+/* 
+Color Palette:
+- Light: #fde8e2
+- Tint: #e89d8b
+- Primary Color: #863a28
+- Shade: #442e29
+- Dark: #2b2524
+- Accent: #e7c84e
+*/
 
+main {
+  background-color: #442e29;
+}
+
+button {
+  transition-duration: 0.25s;
+  background-color: #e7c84e;
+  color: #2b2524;
+  padding: 0.4rem 0.8rem;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #2b2524;
+}
+
+button:hover {
+  transition-duration: 0.25s;
+  background-color: #863a28;
+  color: #fde8e2;
+}

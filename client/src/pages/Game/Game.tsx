@@ -9,7 +9,8 @@ export type item = {
 };
 
 export default function Game() {
-  const allItems: item[] = [{ name: "key" }] as const;
+  // const allItems: item[] = [{ name: "key" }] as const;
+  // Commented this out to make the linter happy for the CI on first demo; uncomment it when needed
 
   const [inventory, setInventory] = useState<item[]>([]);
   const [selectedItem, setSelectedItem] = useState<string>("");

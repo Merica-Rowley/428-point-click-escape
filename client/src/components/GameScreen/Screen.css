@@ -17,8 +17,8 @@
   }
 
   .doorButton {
-    top: 32%;
-    left: 20%;
+    top: 40%;
+    left: 40%;
   }
 }
 
@@ -27,13 +27,13 @@
 }
 
 .win-text {
-  color: gold;
-  background-color: blue;
-  max-width: 170px;
+  color: #2b2524;
+  background-color: #e7c84e;
+  /* max-width: 170px; */
   position: absolute;
-  top: 30%;
-  left: 45%;
-  padding: 10px;
+  top: 44%;
+  left: 37.5%;
+  padding: 20px 50px;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }

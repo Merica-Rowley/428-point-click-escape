@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "./AuthHelper";
 
 type RequireAuthProps = { children?: React.ReactNode };
 
