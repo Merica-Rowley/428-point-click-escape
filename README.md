@@ -1,5 +1,7 @@
 # 428-point-click-escape
 
+Access Deployed Website Here: https://merica-rowley.github.io/428-point-click-escape
+
 TODO: make a package.json script to run both client and server simultaneously
 
 How to get the frontend running locally -
