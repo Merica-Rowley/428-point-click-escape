@@ -1,6 +1,7 @@
 // --- Small helper that shows Sign in / Sign out and handles redirect-after-signin
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "./AuthHelper";
+import "./AuthButtons.css";
 
 export default function AuthButtons() {
   const { isAuthenticated, user, signIn, signOut } = useAuth();

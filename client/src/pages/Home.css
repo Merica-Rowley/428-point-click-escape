@@ -1,0 +1,28 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 60px); /* Adjust based on navbar height */
+}
+
+h2 {
+  color: #fde8e2;
+  margin-bottom: 20px;
+}
+
+h2.about {
+  color: #fde8e2;
+  margin: 5vh 10vh 3vh 10vh;
+}
+
+p {
+  color: #e89d8b;
+  font-size: 18px;
+  margin: 0vh 10vh;
+}
+
+p.how-to {
+  color: #fde8e2;
+  padding-bottom: 5px;
+}

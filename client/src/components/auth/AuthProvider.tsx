@@ -1,23 +1,24 @@
+import { useMemo, useState, type ReactNode } from "react";
+
 import {
-  createContext,
-  useContext,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
+  type AuthContextType,
+  type User,
+  STORAGE_KEY,
+  AuthContext,
+} from "./AuthHelper";
 
 //TODO: Improve context types to reflect auth table and also world state table
-type User = { id: string; name: string };
-type AuthContextType = {
-  user: User | null;
-  isAuthenticated: boolean;
-  signIn: (next: User) => Promise<void>;
-  signOut: () => Promise<void>;
-  register: (name: string) => Promise<void>;
-};
+// type User = { id: string; name: string };
+// type AuthContextType = {
+//   user: User | null;
+//   isAuthenticated: boolean;
+//   signIn: (next: User) => Promise<void>;
+//   signOut: () => Promise<void>;
+//   register: (name: string) => Promise<void>;
+// };
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-const STORAGE_KEY = "demo_auth_user";
+// const AuthContext = createContext<AuthContextType | undefined>(undefined);
+// const STORAGE_KEY = "demo_auth_user";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => {
@@ -68,7 +69,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const user = await res.json();
     setUser(user);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-  }
+  };
 
   const value = useMemo<AuthContextType>(
     () => ({
@@ -82,10 +83,4 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
-
-export function useAuth(): AuthContextType {
-  const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within <AuthProvider>");
-  return ctx;
 }

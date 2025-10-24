@@ -9,7 +9,8 @@ export default function GameScreen(props: {
   onPickUpItem: (itemName: string) => void;
   selectedItem: string;
 }) {
-  const [bgIndex, setBgIndex] = useState(0);
+  // const [bgIndex, setBgIndex] = useState(0);
+  const bgIndex = 0; // For now, only one background, to pass linter and make CI work, use this (setBgIndex is unused)
   const backgrounds = ["bg-one", "bg-two"];
 
   const [showWin, setShowWin] = useState(false);
