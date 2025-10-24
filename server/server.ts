@@ -49,7 +49,7 @@ app.post("/auth/register", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/auth/login", async (req: Request, res: Response) => {
+app.post("/auth/login", async (req: Request, res: Response) => {
   const { name } = req.body;
 
   if (!name) return res.status(400).json({ error: "Name is required" });

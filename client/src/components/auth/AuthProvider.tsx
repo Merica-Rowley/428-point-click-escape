@@ -34,17 +34,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     // Trying to connect to backend
       const res = await fetch(`${BASE_URL}/auth/login`, {
-      method: "GET",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name }),
     });
 
+    const text = await res.text(); // see raw response
+    console.log("Raw response:", text);
+
+    const data = await res.json();
     if (!res.ok) {
-      const data = await res.json();
       throw new Error(data.error || "Failed to login");
     }
 
-    const user = await res.json();
+    const user = data;
     setUser(user);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
     console.log("the user is here ... ", user)
