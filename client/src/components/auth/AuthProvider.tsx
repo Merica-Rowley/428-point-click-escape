@@ -1,4 +1,5 @@
 import { useMemo, useState, type ReactNode } from "react";
+// NOTES FROM ETHAN: PLEASE INCLUDE CREATE CONTEXT IN IMPORTS
 
 import {
   type AuthContextType,
@@ -7,18 +8,19 @@ import {
   AuthContext,
 } from "./AuthHelper";
 
-//TODO: Improve context types to reflect auth table and also world state table
-// type User = { id: string; name: string };
+// Notes from Ethan: UNCOMMENT BELOW TO STUB OUT AUTHENTICATION
+// type User = { id: string | number ; username: string };
 // type AuthContextType = {
 //   user: User | null;
 //   isAuthenticated: boolean;
-//   signIn: (next: User) => Promise<void>;
+//   signIn: (name: string) => Promise<void>;
 //   signOut: () => Promise<void>;
-//   register: (name: string) => Promise<void>;
+//   register: (name: string) => Promise<string>;
 // };
 
 // const AuthContext = createContext<AuthContextType | undefined>(undefined);
 // const STORAGE_KEY = "demo_auth_user";
+// const BASE_URL = "https://four28-point-click-escape.onrender.com";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => {
@@ -31,22 +33,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const demoUser = next ?? { id: "u_123", name: "Demo Player" };
     setUser(demoUser);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(demoUser));
+  
+  // NOTES FROM ETHAN: PLEASE UNCOMMENT THIS CODE FOR SIGN IN TO WORK WITH THE SERVER
 
-    // Trying to connect to backend
-    //   const res = await fetch(`http://localhost:3001/auth/login`, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ name }),
-    // });
+  // const res = await fetch(`${BASE_URL}/auth/login`, {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({ name }),
+  // });
 
-    // if (!res.ok) {
-    //   const data = await res.json();
-    //   throw new Error(data.error || "Failed to login");
-    // }
+  // const data = await res.json();
 
-    // const user = await res.json();
-    // setUser(user);
-    // localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+  // console.log("Response data:", data);
+
+  // if (!res.ok) {
+  //   throw new Error(data.error || "Failed to login");
+  // }
+
+  // setUser(data);
+  // localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  // console.log("The user is here ...", data);
+
+  // return data;
   };
 
   const signOut = async () => {
@@ -55,20 +63,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const register = async (name: string) => {
-    const res = await fetch(`http://localhost:3001/auth/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
-    });
 
-    if (!res.ok) {
-      const data = await res.json();
-      throw new Error(data.error || "Failed to register");
-    }
+    // NOTES FROM ETHAN: PLEASE UNCOMMENT THIS CODE FOR REGISTER TO WORK WITH THE SERVER
+    // const res = await fetch(`${BASE_URL}/auth/register`, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" }, <3 
+    //   body: JSON.stringify({ name }),
+    // });
 
-    const user = await res.json();
-    setUser(user);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+    // if (!res.ok) {
+    //   const data = await res.json();
+    //   throw new Error(data.error || "Failed to register");
+    // }
+
+    // const user = await res.json();
+    // setUser(user);
+    // localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+    // return JSON.stringify(user);
   };
 
   const value = useMemo<AuthContextType>(
@@ -84,3 +95,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
+
+// NOTES FROM ETHAN: PLEASE UNCOMMENT THIS HOOK TO USE AUTH CONTEXT
+// export function useAuth(): AuthContextType {
+//   const ctx = useContext(AuthContext);
+//   if (!ctx) throw new Error("useAuth must be used within <AuthProvider>");
+//   return ctx;
+// }
