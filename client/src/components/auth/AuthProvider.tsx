@@ -8,6 +8,8 @@ import {
   AuthContext,
 } from "./AuthHelper";
 
+// Testing that it commits to this branch
+
 // Notes from Ethan: UNCOMMENT BELOW TO STUB OUT AUTHENTICATION
 // type User = { id: string | number ; username: string };
 // type AuthContextType = {
