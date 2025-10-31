@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "dev": "tsx server/server.ts",
+    "build": "tsc",
+    "test": "jest",
+    "start": "tsx server/server.ts"
   },
   "repository": {
     "type": "git",
