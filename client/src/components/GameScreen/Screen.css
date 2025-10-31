@@ -28,8 +28,12 @@
   }
 }
 
-.bg-one {
+.screen-one-bg-one {
   background-image: url("../../assets/Screen1/bg1.png");
+}
+
+.screen-one-bg-two {
+  background-image: url("../../assets/Screen1/bg2.jpg");
 }
 
 .win-text {
