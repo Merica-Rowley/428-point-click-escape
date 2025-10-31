@@ -4,6 +4,8 @@ import GameScreen from "../../components/GameScreen/Screen";
 import Inventory from "../../components/Inventory/Inventory";
 import "./Game.css";
 
+const BASE_URL = "https://four28-point-click-escape.onrender.com";
+
 export type item = {
   name: string;
 };
@@ -15,11 +17,18 @@ export default function Game() {
   const [inventory, setInventory] = useState<item[]>([]);
   const [selectedItem, setSelectedItem] = useState<string>("");
 
-  const pickUpItem = (itemName: string) => {
+  const pickUpItem = async (itemName: string) => {
     // Only add if inventory not full
     if (inventory.length < 5) {
       setInventory([...inventory, { name: itemName }]);
     }
+    const res = await fetch(`${BASE_URL}/game/inventory`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, item: itemName }),
+    });
+    const data = await res.json();
+    console.log("Updated inventory from server:", data);
   };
 
   const selectItem = (selectedItem: string) => {
