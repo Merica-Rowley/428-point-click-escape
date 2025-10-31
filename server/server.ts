@@ -100,12 +100,21 @@ app.post("/game/inventory", async (req: Request, res: Response) => {
       "UPDATE save_state SET inventory = array_append(inventory, $1) WHERE username = $2 RETURNING inventory",
       [item, name]
     );
+
+    console.log("Query result:", result.rows); // <--- add this
+    console.log("Row count:", result.rowCount); // <--- add this
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Database error" });
   }
 });
+
 
 app.get("/game/room", async (req: Request, res: Response) => {
   const { name } = req.body;

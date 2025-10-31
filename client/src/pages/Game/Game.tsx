@@ -22,13 +22,21 @@ export default function Game() {
     if (inventory.length < 5) {
       setInventory([...inventory, { name: itemName }]);
     }
-    const res = await fetch(`${BASE_URL}/game/inventory`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, item: itemName }),
-    });
-    const data = await res.json();
-    console.log("Updated inventory from server:", data);
+    console.log("Picking up item:", itemName);
+const res = await fetch(`${BASE_URL}/game/inventory`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ name, item: itemName }),
+  });
+
+  if (!res.ok) {
+    console.error("Server returned error:", res.status);
+    return;
+  }
+
+  const data = await res.json();
+  console.log("Updated inventory from server:", data);
+
   };
 
   const selectItem = (selectedItem: string) => {
