@@ -9,11 +9,9 @@ export default function GameScreen(props: {
   onPickUpItem: (itemName: string) => void;
   selectedItem: string;
 }) {
-  // const [bgIndex, setBgIndex] = useState(0);
-  const bgIndex = 0; // For now, only one background, to pass linter and make CI work, use this (setBgIndex is unused)
-  const backgrounds = ["bg-one", "bg-two"];
-
   const [showWin, setShowWin] = useState(false);
+
+  const [screenIndex, setScreenIndex] = useState(0);
 
   const handleDoorClick = () => {
     if (props.selectedItem === "key") {
@@ -21,19 +19,41 @@ export default function GameScreen(props: {
     }
   };
 
-  return (
-    <div className={`background-container ${backgrounds[bgIndex]}`}>
-      {!props.inventory.find((i) => i.name === "key") && (
-        <button className="keyButton" onClick={() => props.onPickUpItem("key")}>
-          <img src={key} alt="key" />
-        </button>
-      )}
+  const handleGoRight = () => {
+    setScreenIndex(screenIndex + 1);
+  };
 
-      <button className="doorButton" onClick={() => handleDoorClick()}>
-        <img src={door} alt="door" />
-      </button>
+  switch (screenIndex) {
+    case 0:
+      return (
+        <div className="background-container bg-one">
+          {!props.inventory.find((i) => i.name === "key") && (
+            <button
+              className="keyButton"
+              onClick={() => props.onPickUpItem("key")}
+            >
+              <img src={key} alt="key" />
+            </button>
+          )}
 
-      {showWin && <h1 className="win-text">YOU WIN</h1>}
-    </div>
-  );
+          <button className="doorButton" onClick={() => handleDoorClick()}>
+            <img src={door} alt="door" />
+          </button>
+
+          <button className="goRight" onClick={() => handleGoRight()}>
+            RIGHT ARROW PLACEHOLDER
+          </button>
+
+          {showWin && <h1 className="win-text">YOU WIN</h1>}
+        </div>
+      );
+    case 1:
+      return <p>screen 2 works</p>;
+    default:
+      return (
+        <p>
+          AAAA you went outside the boundaries of reality!!!! (contact a dev)
+        </p>
+      );
+  }
 }

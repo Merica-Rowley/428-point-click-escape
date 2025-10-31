@@ -12,13 +12,19 @@
   }
 
   .keyButton {
-    top: 65%;
+    top: 63%;
     left: 85%;
   }
 
   .doorButton {
-    top: 40%;
+    top: 43%;
     left: 40%;
+  }
+
+  .goRight {
+    top: 45%;
+    left: 80%;
+    background-color: red;
   }
 }
 
