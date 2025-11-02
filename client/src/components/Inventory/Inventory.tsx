@@ -1,5 +1,6 @@
 import type { item } from "../../pages/Game/Game";
 import key from "../../assets/Screen1/key.png";
+import screwdriver from "../../assets/Screen3/screwdriver.png";
 import { useState } from "react";
 import "./Inventory.css";
 
@@ -14,6 +15,17 @@ export default function Inventory(props: {
     setSelectedIndex(index);
   };
 
+  const renderItemImage = (itemName: string) => {
+    switch (itemName) {
+      case "key":
+        return <img src={key} alt="key" />;
+      case "screwdriver":
+        return <img src={screwdriver} alt="screwdriver" />;
+      default:
+        return null;
+    }
+  };
+
   const displayItems = props.inventory.slice(0, 5);
   return (
     <div className="inventory-bar">
@@ -26,7 +38,7 @@ export default function Inventory(props: {
               }`}
               onClick={() => inventorySelect(item.name, index)}
             >
-              <img src={key} alt="item.name" />
+              {renderItemImage(item.name)}
             </button>
           </div>
         ))}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Screen.css";
 import key from "../../assets/Screen1/key.png";
 import door from "../../assets/Screen1/door.png";
+import screwdriver from "../../assets/Screen3/screwdriver.png";
 import type { item, worldFlag } from "../../pages/Game/Game";
 
 export default function GameScreen(props: {
@@ -96,6 +97,15 @@ export default function GameScreen(props: {
           <button className="goLeft" onClick={() => handleGoLeft()}>
             LEFT ARROW<br></br>PLACEHOLDER
           </button>
+
+          {!props.inventory.find((i) => i.name === "screwdriver") && (
+            <button
+              className="screwdriverButton"
+              onClick={() => props.onPickUpItem("screwdriver")}
+            >
+              <img src={screwdriver} alt="screwdriver" />
+            </button>
+          )}
         </div>
       );
     case 3:

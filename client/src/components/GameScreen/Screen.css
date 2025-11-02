@@ -22,6 +22,12 @@
     opacity: 0;
   }
 
+  .screwdriverButton {
+    top: 38%;
+    left: 64%;
+    transform: scale(0.7) rotate(-5deg);
+  }
+
   .goRight {
     top: 45%;
     left: 84%;
