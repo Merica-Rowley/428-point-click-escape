@@ -3,7 +3,7 @@ import AuthButtons from "../../components/auth/AuthButtons";
 import GameScreen from "../../components/GameScreen/Screen";
 import Inventory from "../../components/Inventory/Inventory";
 import "./Game.css";
-
+import { useAuth } from "../../components/auth/AuthProvider";
 const BASE_URL = "https://four28-point-click-escape.onrender.com";
 
 export type item = {
@@ -16,6 +16,7 @@ export default function Game() {
 
   const [inventory, setInventory] = useState<item[]>([]);
   const [selectedItem, setSelectedItem] = useState<string>("");
+  const { user } = useAuth();
 
   const pickUpItem = async (itemName: string) => {
     // Only add if inventory not full
@@ -23,11 +24,11 @@ export default function Game() {
       setInventory([...inventory, { name: itemName }]);
     }
     console.log("Picking up item:", itemName);
-console.log("Sending body:", { name, item: itemName });
+console.log("Sending body:", { name: user!.username, item: itemName });
 const res = await fetch(`${BASE_URL}/game/inventory`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ name, item: itemName }),
+  body: JSON.stringify({ name: user!.username, item: itemName }),
   });
 
   if (!res.ok) {
