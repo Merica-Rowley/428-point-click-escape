@@ -19,21 +19,41 @@
   .doorButton {
     top: 43%;
     left: 40%;
+    opacity: 0;
   }
 
   .goRight {
     top: 45%;
-    left: 80%;
+    left: 84%;
     background-color: red;
+  }
+
+  .goLeft {
+    top: 45%;
+    left: 0%;
+    background-color: blue;
   }
 }
 
 .screen-one-bg-one {
-  background-image: url("../../assets/Screen1/bg1.png");
+  /* background-image: url("../../assets/Screen1/bg1.png"); */
+  background-image: url("../../assets/Screen1/bg1.1.gif");
 }
 
 .screen-one-bg-two {
   background-image: url("../../assets/Screen1/bg2.jpg");
+}
+
+.screen-two-bg-one {
+  background-image: url("../../assets/Screen2/temp.png");
+}
+
+.screen-three-bg-one {
+  background-image: url("../../assets/Screen3/piano.gif");
+}
+
+.screen-four-bg-one {
+  background-image: url("../../assets/Screen4/bg1.png");
 }
 
 .win-text {

@@ -27,7 +27,19 @@ export default function GameScreen(props: {
   };
 
   const handleGoRight = () => {
+    if (screenIndex === 3) {
+      setScreenIndex(0); // wrap around to "first" screen, this is just hardcoded for now
+      return;
+    }
     setScreenIndex(screenIndex + 1);
+  };
+
+  const handleGoLeft = () => {
+    if (screenIndex === 0) {
+      setScreenIndex(3); // wrap around to "last" screen, this is just hardcoded for now
+      return;
+    }
+    setScreenIndex(screenIndex - 1);
   };
 
   switch (screenIndex) {
@@ -57,11 +69,46 @@ export default function GameScreen(props: {
             RIGHT ARROW PLACEHOLDER
           </button>
 
+          <button className="goLeft" onClick={() => handleGoLeft()}>
+            LEFT ARROW<br></br>PLACEHOLDER
+          </button>
+
           {showWin && <h1 className="win-text">YOU WIN</h1>}
         </div>
       );
     case 1:
-      return <p>screen 2 works</p>;
+      return (
+        <div className={`background-container screen-two-bg-one`}>
+          <button className="goRight" onClick={() => handleGoRight()}>
+            RIGHT ARROW PLACEHOLDER
+          </button>
+          <button className="goLeft" onClick={() => handleGoLeft()}>
+            LEFT ARROW<br></br>PLACEHOLDER
+          </button>
+        </div>
+      );
+    case 2:
+      return (
+        <div className={`background-container screen-three-bg-one`}>
+          <button className="goRight" onClick={() => handleGoRight()}>
+            RIGHT ARROW PLACEHOLDER
+          </button>
+          <button className="goLeft" onClick={() => handleGoLeft()}>
+            LEFT ARROW<br></br>PLACEHOLDER
+          </button>
+        </div>
+      );
+    case 3:
+      return (
+        <div className={`background-container screen-four-bg-one`}>
+          <button className="goRight" onClick={() => handleGoRight()}>
+            RIGHT ARROW<br></br>PLACEHOLDER
+          </button>
+          <button className="goLeft" onClick={() => handleGoLeft()}>
+            LEFT ARROW<br></br>PLACEHOLDER
+          </button>
+        </div>
+      );
     default:
       return (
         <p>

@@ -13,6 +13,7 @@ main {
 }
 
 button {
+  transition-property: color, background-color;
   transition-duration: 0.25s;
   background-color: #e7c84e;
   color: #2b2524;
@@ -24,6 +25,7 @@ button {
 }
 
 button:hover {
+  transition-property: color, background-color;
   transition-duration: 0.25s;
   background-color: #863a28;
   color: #fde8e2;

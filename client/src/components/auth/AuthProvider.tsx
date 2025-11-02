@@ -33,28 +33,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const demoUser = next ?? { id: "u_123", name: "Demo Player" };
     setUser(demoUser);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(demoUser));
-  
-  // NOTES FROM ETHAN: PLEASE UNCOMMENT THIS CODE FOR SIGN IN TO WORK WITH THE SERVER
 
-  // const res = await fetch(`${BASE_URL}/auth/login`, {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify({ name }),
-  // });
+    // NOTES FROM ETHAN: PLEASE UNCOMMENT THIS CODE FOR SIGN IN TO WORK WITH THE SERVER
 
-  // const data = await res.json();
+    // const res = await fetch(`${BASE_URL}/auth/login`, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ name }),
+    // });
 
-  // console.log("Response data:", data);
+    // const data = await res.json();
 
-  // if (!res.ok) {
-  //   throw new Error(data.error || "Failed to login");
-  // }
+    // console.log("Response data:", data);
 
-  // setUser(data);
-  // localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  // console.log("The user is here ...", data);
+    // if (!res.ok) {
+    //   throw new Error(data.error || "Failed to login");
+    // }
 
-  // return data;
+    // setUser(data);
+    // localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    // console.log("The user is here ...", data);
+
+    // return data;
   };
 
   const signOut = async () => {
@@ -63,11 +63,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const register = async (name: string) => {
+    console.log(name); // Remove this whenever we are actually using the server code; the linter doesn't like it if we declare name but don't use it, so the CI fails
 
     // NOTES FROM ETHAN: PLEASE UNCOMMENT THIS CODE FOR REGISTER TO WORK WITH THE SERVER
     // const res = await fetch(`${BASE_URL}/auth/register`, {
     //   method: "POST",
-    //   headers: { "Content-Type": "application/json" }, <3 
+    //   headers: { "Content-Type": "application/json" }, <3
     //   body: JSON.stringify({ name }),
     // });
 
