@@ -23,6 +23,7 @@ export default function Game() {
       setInventory([...inventory, { name: itemName }]);
     }
     console.log("Picking up item:", itemName);
+console.log("Sending body:", { name, item: itemName });
 const res = await fetch(`${BASE_URL}/game/inventory`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },

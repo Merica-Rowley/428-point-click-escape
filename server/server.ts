@@ -95,6 +95,8 @@ app.get("/game/inventory", async (req: Request, res: Response) => {
 
 app.post("/game/inventory", async (req: Request, res: Response) => {
   const { name, item } = req.body;
+  console.log("Received request body:", req.body);
+
   try {
     const result = await pool.query(
       "UPDATE save_state SET inventory = array_append(inventory, $1) WHERE username = $2 RETURNING inventory",
