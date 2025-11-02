@@ -43,8 +43,15 @@ export default function GameScreen(props: {
     setScreenIndex(screenIndex - 1);
   };
 
+  const handleThermostatClick = () => {
+    if (screenIndex === 3) {
+      // desk screen
+      setScreenIndex(5); // Arbitrarily assign thermostat screen index to 5
+    }
+  };
+
   switch (screenIndex) {
-    case 0:
+    case 0: // door
       return (
         <div
           className={`background-container ${
@@ -77,7 +84,7 @@ export default function GameScreen(props: {
           {showWin && <h1 className="win-text">YOU WIN</h1>}
         </div>
       );
-    case 1:
+    case 1: // fireplace
       return (
         <div className={`background-container screen-two-bg-one`}>
           <button className="goRight" onClick={() => handleGoRight()}>
@@ -88,7 +95,7 @@ export default function GameScreen(props: {
           </button>
         </div>
       );
-    case 2:
+    case 2: // piano
       return (
         <div className={`background-container screen-three-bg-one`}>
           <button className="goRight" onClick={() => handleGoRight()}>
@@ -108,7 +115,7 @@ export default function GameScreen(props: {
           )}
         </div>
       );
-    case 3:
+    case 3: // desk
       return (
         <div className={`background-container screen-four-bg-one`}>
           <button className="goRight" onClick={() => handleGoRight()}>
@@ -117,7 +124,17 @@ export default function GameScreen(props: {
           <button className="goLeft" onClick={() => handleGoLeft()}>
             LEFT ARROW<br></br>PLACEHOLDER
           </button>
+          <button
+            className="thermostatDeskButton"
+            onClick={() => handleThermostatClick()}
+          ></button>
         </div>
+      );
+    case 5: // thermostat screen
+      return (
+        <div className={`background-container screen-thermostat-bg`}></div>
+        // Add back button and plus/minus buttons
+        // Also add temperature (will depend on which thermostat we're looking at)
       );
     default:
       return (

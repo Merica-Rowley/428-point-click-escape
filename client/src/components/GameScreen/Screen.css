@@ -28,6 +28,13 @@
     transform: scale(0.7) rotate(-5deg);
   }
 
+  .thermostatDeskButton {
+    top: 20%;
+    left: 5%;
+    width: 10%;
+    height: 13%;
+  }
+
   .goRight {
     top: 45%;
     left: 84%;
@@ -60,6 +67,10 @@
 
 .screen-four-bg-one {
   background-image: url("../../assets/Screen4/bg1.png");
+}
+
+.screen-thermostat-bg {
+  background-image: url("../../assets/Thermostat/bg.png");
 }
 
 .win-text {
