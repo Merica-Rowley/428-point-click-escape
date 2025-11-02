@@ -99,9 +99,15 @@ app.post("/game/inventory", async (req: Request, res: Response) => {
 
   try {
     const result = await pool.query(
-      "UPDATE save_state SET inventory = array_append(inventory, $1) WHERE username = $2 RETURNING inventory",
+      `
+      UPDATE save_state
+      SET inventory = array_append(COALESCE(inventory, '{}'), $1)
+      WHERE username = $2
+      RETURNING inventory
+      `,
       [item, name]
     );
+
 
     console.log("Query result:", result.rows); // <--- add this
     console.log("Row count:", result.rowCount); // <--- add this
