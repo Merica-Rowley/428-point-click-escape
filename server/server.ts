@@ -47,7 +47,7 @@ app.post("/auth/register", async (req: Request, res: Response) => {
     // Insert save state file
     const world_result = await pool.query(
       "INSERT INTO save_state (username, inventory, room, world_state) VALUES ($1, $2, $3, $4)",
-      [name, [], 1, []]
+      [name, [], 1, [["Button in Drawer", false], ["Trap Door Visible", false], ["Password Entered", false], ["Trap Door Button Present", false], ["Painting Fallen", false], ["Screwdriver in Tank", false], ["Unscrewed Safe", false], ["First Button on Safe", false], ["Second Button on Safe", false], ["Third Button on Safe", false], ["Key in Safe", false], ["Lightbulb Down", false], ["Lightbulb Clicked", false], ["Lightbulb in Lamp", false], ["Panel on Wall Opened", false], ["Lamp on", false], ["Button in Panel Clicked", false], ["Code in Thermo 1", false], ["Code in Thermo 2", false], ["Code in Thermo 3", false]]]
     );
 
     res.json(result.rows[0]);
@@ -147,6 +147,31 @@ app.get("/game/state", async (req: Request, res: Response) => {
     const result = await pool.query("SELECT world_state FROM save_state WHERE username = $1", [name]);
     if (result.rows.length === 0) {
       return res.status(404).json({ error: "World State for given user not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database error" });
+  }
+});
+
+app.post("/game/state", async (req: Request, res: Response) => {
+  const { name, world_state } = req.body;
+
+  try {
+    const result = await pool.query(
+      `
+      UPDATE save_state
+      SET world_state = $1
+      WHERE username = $2
+      RETURNING world_state
+      `,
+      [world_state, name]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "User not found" });
     }
 
     res.json(result.rows[0]);
