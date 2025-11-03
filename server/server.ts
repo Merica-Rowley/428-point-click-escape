@@ -16,6 +16,8 @@ const pool = new Pool({
   },
 });
 
+// One small edit to test DB connection
+
 pool.query("SELECT NOW()")
   .then(res => console.log("DB connected:", res.rows[0]))
   .catch(err => console.error("DB connection failed:", err));
