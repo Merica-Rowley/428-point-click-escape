@@ -3,6 +3,8 @@ import "./Screen.css";
 import key from "../../assets/Screen1/key.png";
 import door from "../../assets/Screen1/door.png";
 import screwdriver from "../../assets/Screen3/screwdriver.png";
+import plus from "../../assets/Thermostat/plus.png";
+import minus from "../../assets/Thermostat/minus.png";
 import type { item, worldFlag } from "../../pages/Game/Game";
 
 export default function GameScreen(props: {
@@ -15,6 +17,10 @@ export default function GameScreen(props: {
   const [showWin, setShowWin] = useState(false);
 
   const [screenIndex, setScreenIndex] = useState(0);
+
+  const [temperatures, setTemperatures] = useState([72, 72, 72]);
+  const [currentThermostatIndex, setCurrentThermostatIndex] = useState(0);
+  const [previousScreenIndex, setPreviousScreenIndex] = useState(0);
 
   const checkWorldFlag = (flagName: string) => {
     return props.worldState.some((f) => f.name === flagName && f.state);
@@ -43,11 +49,41 @@ export default function GameScreen(props: {
     setScreenIndex(screenIndex - 1);
   };
 
+  const handleGetOutClick = () => {
+    const prevIndex = previousScreenIndex;
+    setScreenIndex(previousScreenIndex);
+    setPreviousScreenIndex(prevIndex);
+  };
+
   const handleThermostatClick = () => {
+    if (screenIndex === 0) {
+      // door screen
+      setCurrentThermostatIndex(0);
+    }
+    if (screenIndex === 1) {
+      // fireplace screen
+      setCurrentThermostatIndex(1);
+    }
     if (screenIndex === 3) {
       // desk screen
-      setScreenIndex(5); // Arbitrarily assign thermostat screen index to 5
+      setCurrentThermostatIndex(2);
     }
+    setPreviousScreenIndex(screenIndex);
+    setScreenIndex(5); // Arbitrarily assign thermostat screen index to 5
+  };
+
+  const thermostatUpClick = () => {
+    temperatures[currentThermostatIndex] += 1;
+    setTemperatures([...temperatures]);
+  };
+
+  const thermostatDownClick = () => {
+    temperatures[currentThermostatIndex] -= 1;
+    setTemperatures([...temperatures]);
+  };
+
+  const getCurrentTemperature = () => {
+    return temperatures[currentThermostatIndex];
   };
 
   switch (screenIndex) {
@@ -81,12 +117,23 @@ export default function GameScreen(props: {
             LEFT ARROW<br></br>PLACEHOLDER
           </button>
 
+          <button
+            className="thermostatDoorButton"
+            onClick={() => handleThermostatClick()}
+          ></button>
+
           {showWin && <h1 className="win-text">YOU WIN</h1>}
         </div>
       );
     case 1: // fireplace
       return (
         <div className={`background-container screen-two-bg-one`}>
+          <button
+            className="thermostatFireplaceButton"
+            onClick={() => handleThermostatClick()}
+          >
+            THERMOSTAT
+          </button>
           <button className="goRight" onClick={() => handleGoRight()}>
             RIGHT ARROW PLACEHOLDER
           </button>
@@ -132,9 +179,22 @@ export default function GameScreen(props: {
       );
     case 5: // thermostat screen
       return (
-        <div className={`background-container screen-thermostat-bg`}></div>
-        // Add back button and plus/minus buttons
-        // Also add temperature (will depend on which thermostat we're looking at)
+        <>
+          <div className={`background-container screen-thermostat-bg`}>
+            <button className="tempUp" onClick={() => thermostatUpClick()}>
+              <img src={plus} alt="plus" />
+            </button>
+            <button className="tempDown" onClick={() => thermostatDownClick()}>
+              <img src={minus} alt="minus" />
+            </button>
+            <div className="tempDisplayContainer">
+              <div className="tempDisplay">{getCurrentTemperature()}</div>
+            </div>
+            <button className="getOut" onClick={() => handleGetOutClick()}>
+              BACK ARROW<br></br>PLACEHOLDER
+            </button>
+          </div>
+        </>
       );
     default:
       return (
