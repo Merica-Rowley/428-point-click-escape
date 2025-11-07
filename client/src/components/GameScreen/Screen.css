@@ -93,6 +93,54 @@
     font-family: "Share Tech Mono", monospace;
     text-align: center;
   }
+
+  .desk {
+    background-color: yellow;
+    top: 60%;
+    left: 27%;
+    width: 45%;
+    height: 39%;
+  }
+
+  .book {
+    top: 10%;
+    left: 20%;
+  }
+
+  .opened-book {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    background-color: burlywood;
+    width: 150px;
+    height: 227px;
+    display: flex;
+    align-items: center;
+    border: 3px solid brown;
+  }
+
+  .drawer-knob {
+    background-color: brown;
+    height: 25px;
+    width: 25px;
+    top: 80%;
+    left: 50%;
+  }
+
+  .opened-drawer {
+    position: absolute;
+    top: 80%;
+    left: 25%;
+    height: 15%;
+    width: 50%;
+    background-color: #654321;
+  }
+
+  .drawer-button {
+    background-color: green;
+    top: 20%;
+    left: 15%;
+  }
 }
 
 .screen-one-bg-one {
@@ -118,6 +166,10 @@
 
 .screen-thermostat-bg {
   background-image: url("../../assets/Thermostat/bg.png");
+}
+
+.screen-six-bg-one {
+  background-image: url("../../assets/Screen6/bg1.png");
 }
 
 .win-text {
