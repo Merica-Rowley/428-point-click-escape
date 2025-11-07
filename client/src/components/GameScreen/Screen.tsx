@@ -88,6 +88,7 @@ export default function GameScreen(props: {
   };
 
   const handleGoDesk = () => {
+    setPreviousScreenIndex(screenIndex);
     setScreenIndex(6);
   };
 
@@ -215,6 +216,9 @@ export default function GameScreen(props: {
               onClick={() => props.toggleWorldFlag("openedDrawer")}
             ></button>
           )}
+          <button className="getOut" onClick={() => handleGetOutClick()}>
+            BACK ARROW<br></br>PLACEHOLDER
+          </button>
         </div>
       );
     case 5: // thermostat screen
