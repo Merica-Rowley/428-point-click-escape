@@ -158,8 +158,8 @@ app.get("/game/state", async (req: Request, res: Response) => {
   }
 });
 
-app.post("/game/state", async (req: Request, res: Response) => {
-  const { name, world_state } = req.body;
+app.post("/game/save", async (req: Request, res: Response) => {
+  const { name, inventory, world_state } = req.body;
 
   try {
     const result = await pool.query(
@@ -181,8 +181,28 @@ app.post("/game/state", async (req: Request, res: Response) => {
     console.error(err);
     res.status(500).json({ error: "Database error" });
   }
-});
 
+  try {
+    const result = await pool.query(
+      `
+      UPDATE save_state
+      SET inventory = $1
+      WHERE username = $2
+      RETURNING inventory
+      `,
+      [inventory, name]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database error" });
+  }
+});
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

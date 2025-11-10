@@ -4,6 +4,8 @@ import GameScreen from "../../components/GameScreen/Screen";
 import Inventory from "../../components/Inventory/Inventory";
 import "./Game.css";
 
+const BASE_URL = "https://four28-point-click-escape.onrender.com";
+
 export type item = {
   name: string;
 };
@@ -46,11 +48,30 @@ export default function Game() {
     setSelectedItem(selectedItem);
   };
 
+  const saveGame = async (name: string, inventory: item[], worldState: worldFlag[]) => {
+    const res = await fetch(`${BASE_URL}/game/save`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, inventory, worldState }),
+    });
+
+    const data = await res.json();
+
+    console.log("Response data:", data);
+
+    if (!res.ok) {
+      throw new Error(data.error || "Failed to save game");
+    }
+
+    return data;
+  };
+
   return (
     <div className="game-screen">
       <div className="game-buttons">
         <button>Save</button>
         <AuthButtons />
+        <button onClick={() => saveGame("username", inventory, worldState)}>Save</button>
       </div>
       <div className="game-window">
         <GameScreen
