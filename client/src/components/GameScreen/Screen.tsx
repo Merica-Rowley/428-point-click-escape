@@ -120,6 +120,7 @@ export default function GameScreen(props: {
       // Check for the correct sequence
       if ([...updated].toString() === correctSequence.toString()) {
         props.toggleWorldFlag("showLightbulb");
+        console.log(pianoNotes);
         console.log("correct sequence played, show the lightbulb");
       }
       return updated.slice(-4); // keep only the last 4
