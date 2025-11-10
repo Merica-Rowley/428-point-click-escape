@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Screen.css";
+import arrow from "../../assets/arrow.png";
 import key from "../../assets/Screen1/key.png";
 import door from "../../assets/Screen1/door.png";
 import screwdriver from "../../assets/Screen3/screwdriver.png";
@@ -118,7 +119,8 @@ export default function GameScreen(props: {
       const correctSequence = ["c1", "f1", "a1", "b1"];
       // Check for the correct sequence
       if ([...updated].toString() === correctSequence.toString()) {
-        console.log("show the lightbulb now");
+        props.toggleWorldFlag("showLightbulb");
+        console.log("correct sequence played, show the lightbulb");
       }
       return updated.slice(-4); // keep only the last 4
     });
@@ -200,11 +202,11 @@ export default function GameScreen(props: {
           </button>
 
           <button className="goRight" onClick={() => handleGoRight()}>
-            RIGHT ARROW PLACEHOLDER
+            <img src={arrow} className="arrow-right" alt="right-arrow" />
           </button>
 
           <button className="goLeft" onClick={() => handleGoLeft()}>
-            LEFT ARROW<br></br>PLACEHOLDER
+            <img src={arrow} className="arrow-left" alt="left-arrow" />
           </button>
 
           <button
@@ -225,10 +227,11 @@ export default function GameScreen(props: {
             THERMOSTAT
           </button>
           <button className="goRight" onClick={() => handleGoRight()}>
-            RIGHT ARROW PLACEHOLDER
+            <img src={arrow} className="arrow-right" alt="right-arrow" />
           </button>
+
           <button className="goLeft" onClick={() => handleGoLeft()}>
-            LEFT ARROW<br></br>PLACEHOLDER
+            <img src={arrow} className="arrow-left" alt="left-arrow" />
           </button>
         </div>
       );
@@ -236,10 +239,11 @@ export default function GameScreen(props: {
       return (
         <div className={`background-container screen-three-bg-one`}>
           <button className="goRight" onClick={() => handleGoRight()}>
-            RIGHT ARROW PLACEHOLDER
+            <img src={arrow} className="arrow-right" alt="right-arrow" />
           </button>
+
           <button className="goLeft" onClick={() => handleGoLeft()}>
-            LEFT ARROW<br></br>PLACEHOLDER
+            <img src={arrow} className="arrow-left" alt="left-arrow" />
           </button>
           <button
             className="piano-button"
@@ -260,10 +264,11 @@ export default function GameScreen(props: {
       return (
         <div className={`background-container screen-four-bg-one`}>
           <button className="goRight" onClick={() => handleGoRight()}>
-            RIGHT ARROW<br></br>PLACEHOLDER
+            <img src={arrow} className="arrow-right" alt="right-arrow" />
           </button>
+
           <button className="goLeft" onClick={() => handleGoLeft()}>
-            LEFT ARROW<br></br>PLACEHOLDER
+            <img src={arrow} className="arrow-left" alt="left-arrow" />
           </button>
           <button
             className="thermostatDeskButton"
@@ -286,7 +291,7 @@ export default function GameScreen(props: {
               <div className="tempDisplay">{getCurrentTemperature()}</div>
             </div>
             <button className="getOut" onClick={() => handleGetOutClick()}>
-              BACK ARROW<br></br>PLACEHOLDER
+              <img src={arrow} className="arrow-down" alt="back-arrow" />
             </button>
           </div>
         </>
@@ -323,7 +328,7 @@ export default function GameScreen(props: {
             ></button>
           )}
           <button className="getOut" onClick={() => handleGetOutClick()}>
-            BACK ARROW<br></br>PLACEHOLDER
+            <img src={arrow} className="arrow-down" alt="back-arrow" />
           </button>
         </div>
       );
@@ -386,7 +391,7 @@ export default function GameScreen(props: {
               ></button>
             </div>
             <button className="getOut" onClick={() => handleGetOutClick()}>
-              BACK ARROW<br></br>PLACEHOLDER
+              <img src={arrow} className="arrow-down" alt="back-arrow" />
             </button>
           </div>
         </>
