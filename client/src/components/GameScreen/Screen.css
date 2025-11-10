@@ -54,20 +54,35 @@
 
   .goRight {
     top: 45%;
-    left: 84%;
-    background-color: red;
+    left: 92%;
+  }
+
+  .arrow-right {
+    width: 50px;
+    height: 50px;
+    transform: rotate(0deg);
   }
 
   .goLeft {
     top: 45%;
     left: 0%;
-    background-color: blue;
+  }
+
+  .arrow-left {
+    width: 50px;
+    height: 50px;
+    transform: rotate(180deg);
   }
 
   .getOut {
     top: 10%;
     left: 80%;
-    background-color: orange;
+  }
+
+  .arrow-down {
+    width: 50px;
+    height: 50px;
+    transform: rotate(90deg);
   }
 
   .tempUp {
@@ -140,6 +155,80 @@
     top: 20%;
     left: 15%;
   }
+
+  .piano-button {
+    top: 67%;
+    left: 12%;
+    width: 30%;
+    height: 15%;
+    background-color: purple;
+  }
+
+  .piano-keys {
+    .white-key {
+      width: 9%;
+      height: 90%;
+    }
+
+    .black-key {
+      width: 6%;
+      height: 55%;
+      z-index: 1;
+    }
+
+    .c1 {
+      top: 8%;
+      left: 10%;
+    }
+    .c1-sharp {
+      top: 8%;
+      left: 16.6%;
+    }
+    .d1 {
+      top: 8%;
+      left: 20.2%;
+    }
+    .d1-sharp {
+      top: 8%;
+      left: 27.8%;
+    }
+    .e1 {
+      top: 8%;
+      left: 30.3%;
+    }
+    .f1 {
+      top: 8%;
+      left: 40.4%;
+    }
+    .f1-sharp {
+      top: 8%;
+      left: 46%;
+    }
+    .g1 {
+      top: 8%;
+      left: 50.5%;
+    }
+    .g1-sharp {
+      top: 8%;
+      left: 57%;
+    }
+    .a1 {
+      top: 8%;
+      left: 60.6%;
+    }
+    .a1-sharp {
+      top: 8%;
+      left: 68%;
+    }
+    .b1 {
+      top: 8%;
+      left: 70.7%;
+    }
+    .c2 {
+      top: 8%;
+      left: 80.8%;
+    }
+  }
 }
 
 .screen-one-bg-one {
@@ -169,6 +258,10 @@
 
 .screen-six-bg-one {
   background-image: url("../../assets/Screen6/bg1.png");
+}
+
+.screen-eight-bg {
+  background-image: url("../../assets/Screen8/bg1.png");
 }
 
 .win-text {

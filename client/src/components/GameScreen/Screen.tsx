@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Screen.css";
+import arrow from "../../assets/arrow.png";
 import key from "../../assets/Screen1/key.png";
 import door from "../../assets/Screen1/door.png";
 import screwdriver from "../../assets/Screen3/screwdriver.png";
@@ -7,6 +8,19 @@ import plus from "../../assets/Thermostat/plus.png";
 import minus from "../../assets/Thermostat/minus.png";
 import closedBook from "../../assets/Screen6/closed-book.png";
 import type { item, worldFlag } from "../../pages/Game/Game";
+import c1sound from "../../assets/Screen8/sounds/c1.wav";
+import c1sharpsound from "../../assets/Screen8/sounds/c1-sharp.wav";
+import d1sound from "../../assets/Screen8/sounds/d.wav";
+import d1sharpsound from "../../assets/Screen8/sounds/d-sharp.wav";
+import e1sound from "../../assets/Screen8/sounds/e.wav";
+import f1sound from "../../assets/Screen8/sounds/f.wav";
+import f1sharpsound from "../../assets/Screen8/sounds/f-sharp.wav";
+import g1sound from "../../assets/Screen8/sounds/g.wav";
+import g1sharpsound from "../../assets/Screen8/sounds/g-sharp.wav";
+import a1sound from "../../assets/Screen8/sounds/a.wav";
+import a1sharpsound from "../../assets/Screen8/sounds/a-sharp.wav";
+import b1sound from "../../assets/Screen8/sounds/b.wav";
+import c2sound from "../../assets/Screen8/sounds/c2.wav";
 
 export default function GameScreen(props: {
   inventory: item[];
@@ -22,6 +36,8 @@ export default function GameScreen(props: {
   const [temperatures, setTemperatures] = useState([72, 72, 72]);
   const [currentThermostatIndex, setCurrentThermostatIndex] = useState(0);
   const [previousScreenIndex, setPreviousScreenIndex] = useState(0);
+
+  const [pianoNotes, setPianoNotes] = useState<string[]>([]);
 
   const checkWorldFlag = (flagName: string) => {
     return props.worldState.some((f) => f.name === flagName && f.state);
@@ -92,6 +108,76 @@ export default function GameScreen(props: {
     setScreenIndex(6);
   };
 
+  const handlePianoClick = () => {
+    setPreviousScreenIndex(screenIndex);
+    setScreenIndex(8);
+  };
+
+  const handlePianoKeyClick = (note: string) => {
+    setPianoNotes((prevNotes) => {
+      const updated = [...prevNotes.slice(-3), note];
+      const correctSequence = ["c1", "f1", "a1", "b1"];
+      // Check for the correct sequence
+      if ([...updated].toString() === correctSequence.toString()) {
+        props.toggleWorldFlag("showLightbulb");
+        console.log("correct sequence played, show the lightbulb");
+      }
+      return updated.slice(-4); // keep only the last 4
+    });
+
+    playNote(note);
+  };
+
+  const playNote = (note: string) => {
+    let audio;
+    switch (note) {
+      case "c1":
+        audio = new Audio(c1sound);
+        break;
+      case "c1-sharp":
+        audio = new Audio(c1sharpsound);
+        break;
+      case "d1":
+        audio = new Audio(d1sound);
+        break;
+      case "d1-sharp":
+        audio = new Audio(d1sharpsound);
+        break;
+      case "e1":
+        audio = new Audio(e1sound);
+        break;
+      case "f1":
+        audio = new Audio(f1sound);
+        break;
+      case "f1-sharp":
+        audio = new Audio(f1sharpsound);
+        break;
+      case "g1":
+        audio = new Audio(g1sound);
+        break;
+      case "g1-sharp":
+        audio = new Audio(g1sharpsound);
+        break;
+      case "a1":
+        audio = new Audio(a1sound);
+        break;
+      case "a1-sharp":
+        audio = new Audio(a1sharpsound);
+        break;
+      case "b1":
+        audio = new Audio(b1sound);
+        break;
+      case "c2":
+        audio = new Audio(c2sound);
+        break;
+      default:
+        audio = new Audio(c1sound);
+        break;
+    }
+    audio.currentTime = 0;
+    audio.play();
+  };
+
   switch (screenIndex) {
     case 0: // door
       return (
@@ -116,11 +202,11 @@ export default function GameScreen(props: {
           </button>
 
           <button className="goRight" onClick={() => handleGoRight()}>
-            RIGHT ARROW PLACEHOLDER
+            <img src={arrow} className="arrow-right" alt="right-arrow" />
           </button>
 
           <button className="goLeft" onClick={() => handleGoLeft()}>
-            LEFT ARROW<br></br>PLACEHOLDER
+            <img src={arrow} className="arrow-left" alt="left-arrow" />
           </button>
 
           <button
@@ -141,10 +227,11 @@ export default function GameScreen(props: {
             THERMOSTAT
           </button>
           <button className="goRight" onClick={() => handleGoRight()}>
-            RIGHT ARROW PLACEHOLDER
+            <img src={arrow} className="arrow-right" alt="right-arrow" />
           </button>
+
           <button className="goLeft" onClick={() => handleGoLeft()}>
-            LEFT ARROW<br></br>PLACEHOLDER
+            <img src={arrow} className="arrow-left" alt="left-arrow" />
           </button>
         </div>
       );
@@ -152,11 +239,16 @@ export default function GameScreen(props: {
       return (
         <div className={`background-container screen-three-bg-one`}>
           <button className="goRight" onClick={() => handleGoRight()}>
-            RIGHT ARROW PLACEHOLDER
+            <img src={arrow} className="arrow-right" alt="right-arrow" />
           </button>
+
           <button className="goLeft" onClick={() => handleGoLeft()}>
-            LEFT ARROW<br></br>PLACEHOLDER
+            <img src={arrow} className="arrow-left" alt="left-arrow" />
           </button>
+          <button
+            className="piano-button"
+            onClick={() => handlePianoClick()}
+          ></button>
 
           {!props.inventory.find((i) => i.name === "screwdriver") && (
             <button
@@ -172,10 +264,11 @@ export default function GameScreen(props: {
       return (
         <div className={`background-container screen-four-bg-one`}>
           <button className="goRight" onClick={() => handleGoRight()}>
-            RIGHT ARROW<br></br>PLACEHOLDER
+            <img src={arrow} className="arrow-right" alt="right-arrow" />
           </button>
+
           <button className="goLeft" onClick={() => handleGoLeft()}>
-            LEFT ARROW<br></br>PLACEHOLDER
+            <img src={arrow} className="arrow-left" alt="left-arrow" />
           </button>
           <button
             className="thermostatDeskButton"
@@ -184,8 +277,26 @@ export default function GameScreen(props: {
           <button className="desk" onClick={() => handleGoDesk()}></button>
         </div>
       );
-
-    case 6:
+    case 5: // thermostat screen
+      return (
+        <>
+          <div className={`background-container screen-thermostat-bg`}>
+            <button className="tempUp" onClick={() => thermostatUpClick()}>
+              <img src={plus} alt="plus" />
+            </button>
+            <button className="tempDown" onClick={() => thermostatDownClick()}>
+              <img src={minus} alt="minus" />
+            </button>
+            <div className="tempDisplayContainer">
+              <div className="tempDisplay">{getCurrentTemperature()}</div>
+            </div>
+            <button className="getOut" onClick={() => handleGetOutClick()}>
+              <img src={arrow} className="arrow-down" alt="back-arrow" />
+            </button>
+          </div>
+        </>
+      );
+    case 6: // desktop
       //TODO: still need bg assets for this one
       return (
         <div className={`background-container screen-six-bg-one`}>
@@ -217,25 +328,70 @@ export default function GameScreen(props: {
             ></button>
           )}
           <button className="getOut" onClick={() => handleGetOutClick()}>
-            BACK ARROW<br></br>PLACEHOLDER
+            <img src={arrow} className="arrow-down" alt="back-arrow" />
           </button>
         </div>
       );
-    case 5: // thermostat screen
+    case 8: // keyboard
       return (
         <>
-          <div className={`background-container screen-thermostat-bg`}>
-            <button className="tempUp" onClick={() => thermostatUpClick()}>
-              <img src={plus} alt="plus" />
-            </button>
-            <button className="tempDown" onClick={() => thermostatDownClick()}>
-              <img src={minus} alt="minus" />
-            </button>
-            <div className="tempDisplayContainer">
-              <div className="tempDisplay">{getCurrentTemperature()}</div>
+          <div className={`background-container screen-eight-bg`}>
+            <div className={`piano-keys`}>
+              <button
+                className={`c1 white-key`}
+                onClick={() => handlePianoKeyClick("c1")}
+              ></button>
+              <button
+                className={`c1-sharp black-key`}
+                onClick={() => handlePianoKeyClick("c1-sharp")}
+              ></button>
+              <button
+                className={`d1 white-key`}
+                onClick={() => handlePianoKeyClick("d1")}
+              ></button>
+              <button
+                className={`d1-sharp black-key`}
+                onClick={() => handlePianoKeyClick("d1-sharp")}
+              ></button>
+              <button
+                className={`e1 white-key`}
+                onClick={() => handlePianoKeyClick("e1")}
+              ></button>
+              <button
+                className={`f1 white-key`}
+                onClick={() => handlePianoKeyClick("f1")}
+              ></button>
+              <button
+                className={`f1-sharp black-key`}
+                onClick={() => handlePianoKeyClick("f1-sharp")}
+              ></button>
+              <button
+                className={`g1 white-key`}
+                onClick={() => handlePianoKeyClick("g1")}
+              ></button>
+              <button
+                className={`g1-sharp black-key`}
+                onClick={() => handlePianoKeyClick("g1-sharp")}
+              ></button>
+              <button
+                className={`a1 white-key`}
+                onClick={() => handlePianoKeyClick("a1")}
+              ></button>
+              <button
+                className={`a1-sharp black-key`}
+                onClick={() => handlePianoKeyClick("a1-sharp")}
+              ></button>
+              <button
+                className={`b1 white-key`}
+                onClick={() => handlePianoKeyClick("b1")}
+              ></button>
+              <button
+                className={`c2 white-key`}
+                onClick={() => handlePianoKeyClick("c2")}
+              ></button>
             </div>
             <button className="getOut" onClick={() => handleGetOutClick()}>
-              BACK ARROW<br></br>PLACEHOLDER
+              <img src={arrow} className="arrow-down" alt="back-arrow" />
             </button>
           </div>
         </>
