@@ -185,6 +185,11 @@ export default function GameScreen(props: {
     audio.play();
   };
 
+  const handleSafeNavigation = () => {
+    setPreviousScreenIndex(screenIndex);
+    setScreenIndex(9);
+  };
+
   switch (screenIndex) {
     case 0: // door
       return (
@@ -234,11 +239,17 @@ export default function GameScreen(props: {
             THERMOSTAT
           </button>
           {checkWorldFlag("paintingDropped") ? (
-            <img
-              className="dropped-painting"
-              src={painting}
-              alt="dropped painting"
-            />
+            <>
+              <img
+                className="dropped-painting"
+                src={painting}
+                alt="dropped painting"
+              />
+              <button
+                className="goToSafeButton"
+                onClick={() => handleSafeNavigation()}
+              ></button>
+            </>
           ) : (
             <button
               className="paintingButton"
@@ -431,7 +442,13 @@ export default function GameScreen(props: {
       );
 
     case 9: // Safe subscreen
-      return <div className={`background-container screen-safe-bg`}></div>;
+      return (
+        <div className={`background-container screen-safe-bg`}>
+          <button className="getOut" onClick={() => handleGetOutClick()}>
+            BACK ARROW<br></br>PLACEHOLDER
+          </button>
+        </div>
+      );
     default:
       return (
         <p>

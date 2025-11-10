@@ -247,6 +247,13 @@
     left: 0%;
     transform: rotate(90deg);
   }
+
+  .goToSafeButton {
+    width: 34%;
+    height: 31%;
+    left: 31%;
+    top: 1%;
+  }
 }
 
 .screen-one-bg-one {
