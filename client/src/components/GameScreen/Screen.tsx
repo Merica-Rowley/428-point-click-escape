@@ -6,6 +6,7 @@ import screwdriver from "../../assets/Screen3/screwdriver.png";
 import plus from "../../assets/Thermostat/plus.png";
 import minus from "../../assets/Thermostat/minus.png";
 import closedBook from "../../assets/Screen6/closed-book.png";
+import painting from "../../assets/Screen2/painting.png";
 import type { item, worldFlag } from "../../pages/Game/Game";
 
 export default function GameScreen(props: {
@@ -140,6 +141,20 @@ export default function GameScreen(props: {
           >
             THERMOSTAT
           </button>
+          {checkWorldFlag("paintingDropped") ? (
+            <img
+              className="dropped-painting"
+              src={painting}
+              alt="dropped painting"
+            />
+          ) : (
+            <button
+              className="paintingButton"
+              onClick={() => props.toggleWorldFlag("paintingDropped")}
+            >
+              <img src={painting} alt="painting" />
+            </button>
+          )}
           <button className="goRight" onClick={() => handleGoRight()}>
             RIGHT ARROW PLACEHOLDER
           </button>
@@ -168,7 +183,7 @@ export default function GameScreen(props: {
           )}
         </div>
       );
-    case 3: // desk
+    case 3: // desk overwold screen
       return (
         <div className={`background-container screen-four-bg-one`}>
           <button className="goRight" onClick={() => handleGoRight()}>
@@ -185,7 +200,7 @@ export default function GameScreen(props: {
         </div>
       );
 
-    case 6:
+    case 6: //desk subscreen
       //TODO: still need bg assets for this one
       return (
         <div className={`background-container screen-six-bg-one`}>
@@ -240,6 +255,9 @@ export default function GameScreen(props: {
           </div>
         </>
       );
+
+    case 9: // Safe subscreen
+      return <div className={`background-container screen-safe-bg`}></div>;
     default:
       return (
         <p>
