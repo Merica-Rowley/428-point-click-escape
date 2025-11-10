@@ -235,6 +235,18 @@
       left: 80.8%;
     }
   }
+
+  .paintingButton {
+    left: 32%;
+    top: 0%;
+  }
+
+  .dropped-painting {
+    position: absolute;
+    top: 55%;
+    left: 0%;
+    transform: rotate(90deg);
+  }
 }
 
 .screen-one-bg-one {
@@ -247,7 +259,7 @@
 }
 
 .screen-two-bg-one {
-  background-image: url("../../assets/Screen2/temp.png");
+  background-image: url("../../assets/Screen2/fire.gif");
 }
 
 .screen-three-bg-one {
