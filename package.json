@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx server/server.ts",
-    "test": "jest",
     "build": "tsc",
-    "start": "node dist/server/server.js"
+    "test": "jest",
+    "start": "tsx server/server.ts"
   },
   "repository": {
     "type": "git",
