@@ -39,6 +39,7 @@ export default function GameScreen(props: {
   const [temperatures, setTemperatures] = useState([72, 72, 72]);
   const [currentThermostatIndex, setCurrentThermostatIndex] = useState(0);
   const [previousScreenIndex, setPreviousScreenIndex] = useState(0);
+  const [buttonColors, setButtonColors] = useState([0, 0, 0]);
 
   const [pianoNotes, setPianoNotes] = useState<string[]>([]);
 
@@ -201,10 +202,27 @@ export default function GameScreen(props: {
   const handleSocketClick = (sockNum: number) => {
     if (props.selectedItem === "button") {
       props.toggleWorldFlag(`placedButton${sockNum}`);
+      props.removeItem("button");
     }
   };
 
-  const handleSafeOpen = () => {};
+  const handleButtonClick = (buttonNum: number) => {
+    const newColor = (buttonColors[buttonNum - 1] + 1) % 4;
+    buttonColors[buttonNum - 1] = newColor;
+    setButtonColors([...buttonColors]);
+  };
+
+  const checkSafeButtons = () => {
+    return (
+      buttonColors[0] === 1 && buttonColors[1] === 3 && buttonColors[2] === 2
+    );
+  };
+
+  const handleSafeOpen = () => {
+    if (checkSafeButtons()) {
+      props.toggleWorldFlag("safeOpen");
+    }
+  };
 
   switch (screenIndex) {
     case 0: // door
@@ -465,30 +483,55 @@ export default function GameScreen(props: {
           </button>
           {checkWorldFlag("unscrewedPanel") ? (
             <>
-              {checkWorldFlag("placedButton1") &&
-              checkWorldFlag("placedButton2") &&
-              checkWorldFlag("placedButton3") ? (
-                <div></div>
+              {checkWorldFlag("placedButton1") ? (
+                <>
+                  <button
+                    className={`button1 buttonColor${buttonColors[0]}`}
+                    onClick={() => handleButtonClick(1)}
+                  ></button>
+                </>
               ) : (
                 <>
                   <button
                     className="socket1"
                     onClick={() => handleSocketClick(1)}
                   ></button>
+                </>
+              )}
+              {checkWorldFlag("placedButton2") ? (
+                <>
+                  <button
+                    className={`button2 buttonColor${buttonColors[1]}`}
+                    onClick={() => handleButtonClick(2)}
+                  ></button>
+                </>
+              ) : (
+                <>
                   <button
                     className="socket2"
                     onClick={() => handleSocketClick(2)}
                   ></button>
+                </>
+              )}
+              {checkWorldFlag("placedButton3") ? (
+                <>
+                  <button
+                    className={`button3 buttonColor${buttonColors[2]}`}
+                    onClick={() => handleButtonClick(3)}
+                  ></button>
+                </>
+              ) : (
+                <>
                   <button
                     className="socket3"
                     onClick={() => handleSocketClick(3)}
                   ></button>
-                  <button
-                    className="safeHandle"
-                    onClick={() => handleSafeOpen()}
-                  ></button>
                 </>
               )}
+              <button
+                className="safeHandle"
+                onClick={() => handleSafeOpen()}
+              ></button>
             </>
           ) : (
             <>
