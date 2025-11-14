@@ -108,6 +108,11 @@ export default function GameScreen(props: {
     setScreenIndex(6);
   };
 
+  const handleSheetMusicClick = () => {
+    setPreviousScreenIndex(screenIndex);
+    setScreenIndex(7);
+  };
+
   const handlePianoClick = () => {
     setPreviousScreenIndex(screenIndex);
     setScreenIndex(8);
@@ -116,7 +121,7 @@ export default function GameScreen(props: {
   const handlePianoKeyClick = (note: string) => {
     setPianoNotes((prevNotes) => {
       const updated = [...prevNotes.slice(-3), note];
-      const correctSequence = ["c1", "f1", "a1", "b1"];
+      const correctSequence = ["c1", "f1", "a1-sharp", "b1"];
       // Check for the correct sequence
       if ([...updated].toString() === correctSequence.toString()) {
         props.toggleWorldFlag("showLightbulb");
@@ -250,6 +255,10 @@ export default function GameScreen(props: {
             className="piano-button"
             onClick={() => handlePianoClick()}
           ></button>
+          <button
+            className="sheet-music-button"
+            onClick={() => handleSheetMusicClick()}
+          ></button>
 
           {!props.inventory.find((i) => i.name === "screwdriver") && (
             <button
@@ -328,6 +337,14 @@ export default function GameScreen(props: {
               onClick={() => props.toggleWorldFlag("openedDrawer")}
             ></button>
           )}
+          <button className="getOut" onClick={() => handleGetOutClick()}>
+            <img src={arrow} className="arrow-down" alt="back-arrow" />
+          </button>
+        </div>
+      );
+    case 7: // sheet music
+      return (
+        <div className={`background-container screen-seven-bg`}>
           <button className="getOut" onClick={() => handleGetOutClick()}>
             <img src={arrow} className="arrow-down" alt="back-arrow" />
           </button>
