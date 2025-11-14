@@ -234,15 +234,6 @@ export default function GameScreen(props: {
               : "screen-one-bg-one"
           }`}
         >
-          {!props.inventory.find((i) => i.name === "key") && (
-            <button
-              className="keyButton"
-              onClick={() => props.onPickUpItem("key")}
-            >
-              <img src={key} alt="key" />
-            </button>
-          )}
-
           <button className="doorButton" onClick={() => handleDoorClick()}>
             <img src={door} alt="door" />
           </button>
@@ -483,55 +474,76 @@ export default function GameScreen(props: {
           </button>
           {checkWorldFlag("unscrewedPanel") ? (
             <>
-              {checkWorldFlag("placedButton1") ? (
+              {checkWorldFlag("safeOpen") ? (
                 <>
-                  <button
-                    className={`button1 buttonColor${buttonColors[0]}`}
-                    onClick={() => handleButtonClick(1)}
-                  ></button>
+                  {!props.inventory.find((i) => i.name === "key") && (
+                    <button
+                      className="keyButton"
+                      onClick={() => props.onPickUpItem("key")}
+                    >
+                      <img src={key} alt="key" />
+                    </button>
+                  )}
                 </>
               ) : (
                 <>
+                  {checkWorldFlag("placedButton1") ? (
+                    <>
+                      <button
+                        className={`button1 buttonColor${buttonColors[0]}`}
+                        onClick={() => handleButtonClick(1)}
+                      ></button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="socket1"
+                        onClick={() => handleSocketClick(1)}
+                      ></button>
+                    </>
+                  )}
+                  {checkWorldFlag("placedButton2") ? (
+                    <>
+                      <button
+                        className={`button2 buttonColor${buttonColors[1]}`}
+                        onClick={() => handleButtonClick(2)}
+                      ></button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="socket2"
+                        onClick={() => handleSocketClick(2)}
+                      ></button>
+                    </>
+                  )}
+                  {checkWorldFlag("placedButton3") ? (
+                    <>
+                      <button
+                        className={`button3 buttonColor${buttonColors[2]}`}
+                        onClick={() => handleButtonClick(3)}
+                      ></button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="socket3"
+                        onClick={() => handleSocketClick(3)}
+                      ></button>
+                    </>
+                  )}
                   <button
-                    className="socket1"
-                    onClick={() => handleSocketClick(1)}
+                    className="safeHandle"
+                    onClick={() => handleSafeOpen()}
                   ></button>
+                  <button
+                    className="testButton"
+                    onClick={() => props.onPickUpItem("button")}
+                  >
+                    DELETE THIS
+                  </button>
                 </>
               )}
-              {checkWorldFlag("placedButton2") ? (
-                <>
-                  <button
-                    className={`button2 buttonColor${buttonColors[1]}`}
-                    onClick={() => handleButtonClick(2)}
-                  ></button>
-                </>
-              ) : (
-                <>
-                  <button
-                    className="socket2"
-                    onClick={() => handleSocketClick(2)}
-                  ></button>
-                </>
-              )}
-              {checkWorldFlag("placedButton3") ? (
-                <>
-                  <button
-                    className={`button3 buttonColor${buttonColors[2]}`}
-                    onClick={() => handleButtonClick(3)}
-                  ></button>
-                </>
-              ) : (
-                <>
-                  <button
-                    className="socket3"
-                    onClick={() => handleSocketClick(3)}
-                  ></button>
-                </>
-              )}
-              <button
-                className="safeHandle"
-                onClick={() => handleSafeOpen()}
-              ></button>
             </>
           ) : (
             <>
