@@ -8,5 +8,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["server/**/*"]
+  "include": ["server/**/*.ts"],     // only include server TS files
+  "exclude": ["server/tests", "**/*.test.ts", "jest.config.js", "knexfile.ts"]
 }
+
