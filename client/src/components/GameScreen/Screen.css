@@ -75,8 +75,8 @@
   }
 
   .getOut {
-    top: 10%;
-    left: 80%;
+    top: 86%;
+    left: 47%;
   }
 
   .arrow-down {
@@ -156,12 +156,18 @@
     left: 15%;
   }
 
+  .sheet-music-button {
+    top: 52.5%;
+    left: 68%;
+    width: 20%;
+    height: 40%;
+  }
+
   .piano-button {
     top: 67%;
     left: 12%;
     width: 30%;
     height: 15%;
-    background-color: purple;
   }
 
   .piano-keys {
@@ -258,6 +264,10 @@
 
 .screen-six-bg-one {
   background-image: url("../../assets/Screen6/bg1.png");
+}
+
+.screen-seven-bg {
+  background-image: url("../../assets/Screen7/sheetmusic.png");
 }
 
 .screen-eight-bg {

@@ -11,7 +11,6 @@ export default function AuthButtons() {
   const [name, setName] = useState("");
 
   const handleSignIn = async () => {
-
     console.log("Attempting to sign in with name:", name);
     if (!name.trim()) {
       alert("Please enter your name before signing in.");
@@ -33,27 +32,37 @@ export default function AuthButtons() {
       return;
     }
 
-  try {
-    const user = await register(name);
+    try {
+      const user = await register(name);
 
-    console.log("Parsed user:", user);
+      console.log("Parsed user:", user);
 
-    setName(user.username);
-    navigate("/game", { replace: true });
-  } catch (error: any) {
-    console.error("Registration failed:", error);
-    alert(error.message || "Registration failed. Please try again.");
-  }
+      setName(user.username);
+      navigate("/game", { replace: true });
+    } catch (error: any) {
+      console.error("Registration failed:", error);
+      alert(error.message || "Registration failed. Please try again.");
+    }
   };
 
-  console.log("The name of the user is ... ", name)
+  console.log("The name of the user is ... ", name);
 
   return isAuthenticated ? (
-    <div>
-      <p>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "100%",
+      }}
+    >
+      <p style={{ textAlign: "left", margin: 0 }}>
         Signed in as <strong>{user?.username}</strong>
       </p>
-      <button onClick={signOut}>Sign out</button>
+      <div style={{ display: "flex", gap: "0.5rem" }}>
+        <button>Save</button>
+        <button onClick={signOut}>Sign out</button>
+      </div>
     </div>
   ) : (
     <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>

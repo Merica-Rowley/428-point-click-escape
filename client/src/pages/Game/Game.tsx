@@ -49,7 +49,6 @@ export default function Game() {
   return (
     <div className="game-screen">
       <div className="game-buttons">
-        <button>Save</button>
         <AuthButtons />
       </div>
       <div className="game-window">
