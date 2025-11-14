@@ -7,6 +7,7 @@ import plus from "../../assets/Thermostat/plus.png";
 import minus from "../../assets/Thermostat/minus.png";
 import closedBook from "../../assets/Screen6/closed-book.png";
 import painting from "../../assets/Screen2/painting.png";
+import panel from "../../assets/Safe/panel.png";
 import type { item, worldFlag } from "../../pages/Game/Game";
 
 export default function GameScreen(props: {
@@ -96,6 +97,12 @@ export default function GameScreen(props: {
   const handleSafeNavigation = () => {
     setPreviousScreenIndex(screenIndex);
     setScreenIndex(9);
+  };
+
+  const handleScrewClick = () => {
+    if (props.selectedItem === "screwdriver") {
+      props.toggleWorldFlag("unscrewedPanel");
+    }
   };
 
   switch (screenIndex) {
@@ -270,9 +277,36 @@ export default function GameScreen(props: {
     case 9: // Safe subscreen
       return (
         <div className={`background-container screen-safe-bg`}>
-          <button className="getOut" onClick={() => handleGetOutClick()}>
+          <button className="exitSafe" onClick={() => handleGetOutClick()}>
             BACK ARROW<br></br>PLACEHOLDER
           </button>
+          {checkWorldFlag("unscrewedPanel") ? (
+            <div></div>
+          ) : (
+            <>
+              <img
+                className="screw-panel"
+                src={panel}
+                alt="panel with screws"
+              />
+              <button
+                className="screw1"
+                onClick={() => handleScrewClick()}
+              ></button>
+              <button
+                className="screw2"
+                onClick={() => props.toggleWorldFlag("unscrewedPanel")}
+              ></button>
+              <button
+                className="screw3"
+                onClick={() => props.toggleWorldFlag("unscrewedPanel")}
+              ></button>
+              <button
+                className="screw4"
+                onClick={() => props.toggleWorldFlag("unscrewedPanel")}
+              ></button>
+            </>
+          )}
         </div>
       );
     default:
