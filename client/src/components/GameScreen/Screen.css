@@ -202,6 +202,67 @@
     top: 76%;
     left: 85%;
   }
+
+  .buttonColor0 {
+    background-color: pink;
+  }
+  .buttonColor1 {
+    background-color: orange;
+  }
+  .buttonColor2 {
+    background-color: blue;
+  }
+  .buttonColor3 {
+    background-color: green;
+  }
+
+  .button1 {
+    height: 12%;
+    width: 7%;
+    top: 10%;
+    left: 10%;
+  }
+  .socket1 {
+    height: 12%;
+    width: 7%;
+    top: 10%;
+    left: 10%;
+    background-color: purple;
+  }
+  .button2 {
+    height: 12%;
+    width: 7%;
+    top: 50%;
+    left: 10%;
+  }
+  .socket2 {
+    height: 12%;
+    width: 7%;
+    top: 50%;
+    left: 10%;
+    background-color: purple;
+  }
+  .button3 {
+    height: 12%;
+    width: 7%;
+    top: 85%;
+    left: 10%;
+  }
+  .socket3 {
+    height: 12%;
+    width: 7%;
+    top: 85%;
+    left: 10%;
+    background-color: purple;
+  }
+
+  .safeHandle {
+    top: 50%;
+    left: 50%;
+    width: 20%;
+    height: 20%;
+    background-color: aqua;
+  }
 }
 
 .screen-one-bg-one {
