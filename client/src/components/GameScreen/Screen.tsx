@@ -14,6 +14,7 @@ export default function GameScreen(props: {
   inventory: item[];
   worldState: worldFlag[];
   onPickUpItem: (itemName: string) => void;
+  removeItem: (itemName: string) => void;
   selectedItem: string;
   toggleWorldFlag: (flagName: string) => void;
 }) {
@@ -104,6 +105,14 @@ export default function GameScreen(props: {
       props.toggleWorldFlag("unscrewedPanel");
     }
   };
+
+  const handleSocketClick = (sockNum: number) => {
+    if (props.selectedItem === "button") {
+      props.toggleWorldFlag(`placedButton${sockNum}`);
+    }
+  };
+
+  const handleSafeOpen = () => {};
 
   switch (screenIndex) {
     case 0: // door
@@ -234,10 +243,10 @@ export default function GameScreen(props: {
           )}
           {checkWorldFlag("openedDrawer") ? (
             <div className="opened-drawer">
-              {!props.inventory.find((i) => i.name === "drawer-button") && (
+              {!props.inventory.find((i) => i.name === "button") && (
                 <button
                   className="drawer-button"
-                  onClick={() => props.onPickUpItem("drawer-button")}
+                  onClick={() => props.onPickUpItem("button")}
                 >
                   ButtonPlaceholder
                 </button>
@@ -281,7 +290,32 @@ export default function GameScreen(props: {
             BACK ARROW<br></br>PLACEHOLDER
           </button>
           {checkWorldFlag("unscrewedPanel") ? (
-            <div></div>
+            <>
+              {checkWorldFlag("placedButton1") &&
+              checkWorldFlag("placedButton2") &&
+              checkWorldFlag("placedButton3") ? (
+                <div></div>
+              ) : (
+                <>
+                  <button
+                    className="socket1"
+                    onClick={() => handleSocketClick(1)}
+                  ></button>
+                  <button
+                    className="socket2"
+                    onClick={() => handleSocketClick(2)}
+                  ></button>
+                  <button
+                    className="socket3"
+                    onClick={() => handleSocketClick(3)}
+                  ></button>
+                  <button
+                    className="safeHandle"
+                    onClick={() => handleSafeOpen()}
+                  ></button>
+                </>
+              )}
+            </>
           ) : (
             <>
               <img
