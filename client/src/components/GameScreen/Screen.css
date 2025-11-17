@@ -274,12 +274,12 @@
   }
 
   .exitSafe {
-    top: 76%;
+    /* top: 76%;
     left: 45%;
     width: 10%;
-    height: 10%;
+    height: 10%; */
     z-index: 10;
-    background-color: orange;
+    /* background-color: orange; */
   }
 
   .screw-panel {
