@@ -260,9 +260,7 @@ export default function GameScreen(props: {
           <button
             className="thermostatFireplaceButton"
             onClick={() => handleThermostatClick()}
-          >
-            THERMOSTAT
-          </button>
+          ></button>
           {checkWorldFlag("paintingDropped") ? (
             <>
               <img
@@ -392,7 +390,7 @@ export default function GameScreen(props: {
               {!props.inventory.find((i) => i.name === "button") && (
                 <button
                   className="drawer-button"
-                  onClick={() => props.onPickUpItem("button")}
+                  onClick={() => props.onPickUpItem("drawer-button")}
                 >
                   ButtonPlaceholder
                 </button>

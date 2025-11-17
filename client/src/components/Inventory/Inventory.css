@@ -9,8 +9,8 @@
 }
 
 .inventory-bar {
+  background-color: #2b2524;
   display: flex;
   flex-direction: row;
   align-items: center; /* ← centers items vertically */
-  background-color: #2b2524;
 }

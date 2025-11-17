@@ -64,10 +64,10 @@
 
   .thermostatFireplaceButton {
     top: 20%;
-    left: 5%;
+    left: 4.5%;
     width: 10%;
     height: 13%;
-    background-color: forestgreen;
+    /* background-color: forestgreen; */
   }
 
   .goRight {
