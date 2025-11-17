@@ -1,5 +1,16 @@
 .inventory-box {
+  button {
+    background-color: transparent;
+    border: none;
+  }
   .selected-item {
     background-color: #e89d8b;
   }
+}
+
+.inventory-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* ← centers items vertically */
+  background-color: #2b2524;
 }

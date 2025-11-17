@@ -24,6 +24,24 @@
     opacity: 0;
   }
 
+  .lightbulbButton {
+    top: 10%;
+    left: 24%;
+    width: 7%;
+    height: 26%;
+    transform: rotate(-180deg);
+    z-index: 1;
+  }
+
+  .lightbulbChain {
+    top: -15.5%;
+    left: 25%;
+    scale: 0.5;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
   .screwdriverButton {
     top: 38%;
     left: 64%;
