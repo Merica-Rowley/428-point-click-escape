@@ -200,9 +200,9 @@ export default function GameScreen(props: {
   };
 
   const handleSocketClick = (sockNum: number) => {
-    if (props.selectedItem === "button") {
+    if (props.selectedItem === "drawer-button") {
       props.toggleWorldFlag(`placedButton${sockNum}`);
-      props.removeItem("button");
+      props.removeItem("drawer-button");
     }
   };
 
@@ -387,7 +387,7 @@ export default function GameScreen(props: {
           )}
           {checkWorldFlag("openedDrawer") ? (
             <div className="opened-drawer">
-              {!props.inventory.find((i) => i.name === "button") && (
+              {!props.inventory.find((i) => i.name === "drawer-button") && (
                 <button
                   className="drawer-button"
                   onClick={() => props.onPickUpItem("drawer-button")}
@@ -479,12 +479,14 @@ export default function GameScreen(props: {
           </div>
         </>
       );
-
     case 9: // Safe subscreen
       return (
         <div className={`background-container screen-safe-bg`}>
-          <button className="exitSafe" onClick={() => handleGetOutClick()}>
-            BACK ARROW<br></br>PLACEHOLDER
+          <button
+            className="getOut exitSafe"
+            onClick={() => handleGetOutClick()}
+          >
+            <img src={arrow} className="arrow-down" alt="back-arrow" />
           </button>
           {checkWorldFlag("unscrewedPanel") ? (
             <>
