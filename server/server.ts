@@ -55,7 +55,7 @@ app.post("/auth/register", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in register" });
   }
 });
 
@@ -75,7 +75,7 @@ app.post("/auth/login", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in login" });
   }
 });
 
@@ -91,7 +91,7 @@ app.get("/game/inventory", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in getting inventory" });
   }
 });
 
@@ -121,7 +121,7 @@ app.post("/game/inventory", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in posting inventory" });
   }
 });
 
@@ -138,7 +138,7 @@ app.get("/game/room", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in getting room" });
   }
 });
 
@@ -154,7 +154,7 @@ app.get("/game/state", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in getting state" });
   }
 });
 
@@ -179,7 +179,8 @@ app.post("/game/save", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    console.log("The database error is ... ", err)
+    res.status(500).json({ error: "Database error in updating world state" });
   }
 
   try {
@@ -200,7 +201,7 @@ app.post("/game/save", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in updating inventory" });
   }
 });
 const PORT = process.env.PORT || 3001;

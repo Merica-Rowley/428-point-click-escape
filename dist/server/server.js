@@ -144,6 +144,7 @@ app.post("/game/save", async (req, res) => {
     }
     catch (err) {
         console.error(err);
+        console.log("The database error is ... ", err);
         res.status(500).json({ error: "Database error" });
     }
     try {

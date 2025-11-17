@@ -4,7 +4,7 @@
  */
 exports.up = function(knex) {
   return knex.schema.createTable('auth_table', (table) => {
-    table.integer('id').primary();
+    table.increments('id').primary();
     table.string('username').notNullable().unique();
     table.timestamps(true, true);
   });

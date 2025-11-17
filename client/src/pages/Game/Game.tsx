@@ -3,6 +3,7 @@ import AuthButtons from "../../components/auth/AuthButtons";
 import GameScreen from "../../components/GameScreen/Screen";
 import Inventory from "../../components/Inventory/Inventory";
 import "./Game.css";
+import { useAuth } from "../../components/auth/AuthProvider";
 
 const BASE_URL = "https://four28-point-click-escape.onrender.com";
 
@@ -22,6 +23,7 @@ export default function Game() {
   const [inventory, setInventory] = useState<item[]>([]);
   const [worldState, setWorldState] = useState<worldFlag[]>([]);
   const [selectedItem, setSelectedItem] = useState<string>("");
+  const { user } = useAuth();
 
   const pickUpItem = (itemName: string) => {
     // Only add if inventory not full
@@ -55,6 +57,8 @@ export default function Game() {
       body: JSON.stringify({ name, inventory, worldState }),
     });
 
+    console.log("Username being sent: ", name)
+
     const data = await res.json();
 
     console.log("Response data:", data);
@@ -71,7 +75,7 @@ export default function Game() {
       <div className="game-buttons">
         <button>Save</button>
         <AuthButtons />
-        <button onClick={() => saveGame("username", inventory, worldState)}>Save</button>
+        <button onClick={() => saveGame(user!.username, inventory, worldState)}>Save</button>
       </div>
       <div className="game-window">
         <GameScreen
