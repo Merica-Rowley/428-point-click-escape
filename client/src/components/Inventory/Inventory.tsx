@@ -1,6 +1,7 @@
 import type { item } from "../../pages/Game/Game";
 import key from "../../assets/Screen1/key.png";
 import screwdriver from "../../assets/Screen3/screwdriver.png";
+import lightbulb from "../../assets/Screen3/lightbulb.png";
 import { useState } from "react";
 import "./Inventory.css";
 
@@ -21,6 +22,8 @@ export default function Inventory(props: {
         return <img src={key} alt="key" />;
       case "screwdriver":
         return <img src={screwdriver} alt="screwdriver" />;
+      case "lightbulb":
+        return <img src={lightbulb} alt="lightbulb" />;
       case "drawer-button":
         return <div>button</div>;
       default:

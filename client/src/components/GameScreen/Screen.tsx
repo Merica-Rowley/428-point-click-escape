@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Screen.css";
 import arrow from "../../assets/arrow.png";
 import key from "../../assets/Screen1/key.png";
 import door from "../../assets/Screen1/door.png";
 import screwdriver from "../../assets/Screen3/screwdriver.png";
+import lightbulb from "../../assets/Screen3/lightbulb.png";
+import lightbulbChain from "../../assets/Screen3/lightbulb-chain.png";
 import plus from "../../assets/Thermostat/plus.png";
 import minus from "../../assets/Thermostat/minus.png";
 import closedBook from "../../assets/Screen6/closed-book.png";
@@ -38,6 +40,15 @@ export default function GameScreen(props: {
   const [previousScreenIndex, setPreviousScreenIndex] = useState(0);
 
   const [pianoNotes, setPianoNotes] = useState<string[]>([]);
+
+  const correctPianoSequence = ["c1", "f1", "a1-sharp", "b1"];
+
+  useEffect(() => {
+    if (pianoNotes.toString() === correctPianoSequence.toString()) {
+      props.toggleWorldFlag("showLightbulb");
+      console.log("correct sequence played, show the lightbulb");
+    }
+  }, [pianoNotes]);
 
   const checkWorldFlag = (flagName: string) => {
     return props.worldState.some((f) => f.name === flagName && f.state);
@@ -119,18 +130,7 @@ export default function GameScreen(props: {
   };
 
   const handlePianoKeyClick = (note: string) => {
-    setPianoNotes((prevNotes) => {
-      const updated = [...prevNotes.slice(-3), note];
-      const correctSequence = ["c1", "f1", "a1-sharp", "b1"];
-      // Check for the correct sequence
-      if ([...updated].toString() === correctSequence.toString()) {
-        props.toggleWorldFlag("showLightbulb");
-        console.log(pianoNotes);
-        console.log("correct sequence played, show the lightbulb");
-      }
-      return updated.slice(-4); // keep only the last 4
-    });
-
+    setPianoNotes((prev) => [...prev.slice(-3), note]);
     playNote(note);
   };
 
@@ -266,6 +266,22 @@ export default function GameScreen(props: {
               onClick={() => props.onPickUpItem("screwdriver")}
             >
               <img src={screwdriver} alt="screwdriver" />
+            </button>
+          )}
+
+          {checkWorldFlag("showLightbulb") &&
+            !props.inventory.find((i) => i.name === "lightbulb") && (
+              <button
+                className="lightbulbButton"
+                onClick={() => props.onPickUpItem("lightbulb")}
+              >
+                <img src={lightbulb} alt="lightbulb" />
+              </button>
+            )}
+
+          {checkWorldFlag("showLightbulb") && (
+            <button className="lightbulbChain">
+              <img src={lightbulbChain} alt="lightbulbChain" />
             </button>
           )}
         </div>

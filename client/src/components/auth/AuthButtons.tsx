@@ -45,7 +45,7 @@ export default function AuthButtons() {
     }
   };
 
-  console.log("The name of the user is ... ", name);
+  // console.log("The name of the user is ... ", name);
 
   return isAuthenticated ? (
     <div
