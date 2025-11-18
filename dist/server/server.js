@@ -39,12 +39,12 @@ app.post("/auth/register", async (req, res) => {
         // Insert user
         const result = await pool.query("INSERT INTO auth_table (username) VALUES ($1) RETURNING *", [name]);
         // Insert save state file
-        const world_result = await pool.query("INSERT INTO save_state (username, inventory, room, world_state) VALUES ($1, $2, $3, $4)", [name, [], 1, [["Button in Drawer", false], ["Trap Door Visible", false], ["Password Entered", false], ["Trap Door Button Present", false], ["Painting Fallen", false], ["Screwdriver in Tank", false], ["Unscrewed Safe", false], ["First Button on Safe", false], ["Second Button on Safe", false], ["Third Button on Safe", false], ["Key in Safe", false], ["Lightbulb Down", false], ["Lightbulb Clicked", false], ["Lightbulb in Lamp", false], ["Panel on Wall Opened", false], ["Lamp on", false], ["Button in Panel Clicked", false], ["Code in Thermo 1", false], ["Code in Thermo 2", false], ["Code in Thermo 3", false]]]);
+        const world_result = await pool.query("INSERT INTO save_state (username, inventory, room, world_state) VALUES ($1, $2, $3, $4)", [name, [], 1, []]);
         res.json(result.rows[0]);
     }
     catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Database error" });
+        res.status(500).json({ error: "Database error in register" });
     }
 });
 app.post("/auth/login", async (req, res) => {
@@ -61,7 +61,7 @@ app.post("/auth/login", async (req, res) => {
     }
     catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Database error" });
+        res.status(500).json({ error: "Database error in login" });
     }
 });
 app.get("/game/inventory", async (req, res) => {
@@ -75,7 +75,7 @@ app.get("/game/inventory", async (req, res) => {
     }
     catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Database error" });
+        res.status(500).json({ error: "Database error in getting inventory" });
     }
 });
 app.post("/game/inventory", async (req, res) => {
@@ -97,7 +97,7 @@ app.post("/game/inventory", async (req, res) => {
     }
     catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Database error" });
+        res.status(500).json({ error: "Database error in posting inventory" });
     }
 });
 app.get("/game/room", async (req, res) => {
@@ -111,7 +111,7 @@ app.get("/game/room", async (req, res) => {
     }
     catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Database error" });
+        res.status(500).json({ error: "Database error in getting room" });
     }
 });
 app.get("/game/state", async (req, res) => {
@@ -125,7 +125,7 @@ app.get("/game/state", async (req, res) => {
     }
     catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Database error" });
+        res.status(500).json({ error: "Database error in getting state" });
     }
 });
 app.post("/game/save", async (req, res) => {
@@ -145,7 +145,7 @@ app.post("/game/save", async (req, res) => {
     catch (err) {
         console.error(err);
         console.log("The database error is ... ", err);
-        res.status(500).json({ error: "Database error" });
+        res.status(500).json({ error: "Database error in updating world state" });
     }
     try {
         const result = await pool.query(`
@@ -161,7 +161,7 @@ app.post("/game/save", async (req, res) => {
     }
     catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Database error" });
+        res.status(500).json({ error: "Database error in updating inventory" });
     }
 });
 const PORT = process.env.PORT || 3001;
