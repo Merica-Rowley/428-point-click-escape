@@ -1,7 +1,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('save_state', (table) => {
     table.string('username').primary();
-    table.string('room');  
+    table.integer('room').notNullable().defaultTo(1);
     // inventory: array of strings
     table.specificType('inventory', 'text[]').defaultTo('{}');
     // world_state: JSONB array of objects

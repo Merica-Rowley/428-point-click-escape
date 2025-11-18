@@ -49,7 +49,7 @@ app.post("/auth/register", async (req: Request, res: Response) => {
     // Insert save state file
     const world_result = await pool.query(
       "INSERT INTO save_state (username, inventory, room, world_state) VALUES ($1, $2, $3, $4)",
-      [name, JSON.stringify([]), 1, JSON.stringify([])]
+      [name, [], 1, JSON.stringify([])]
     );
 
     res.json(result.rows[0]);
