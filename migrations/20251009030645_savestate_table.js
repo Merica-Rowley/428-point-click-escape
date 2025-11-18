@@ -3,9 +3,9 @@ exports.up = function(knex) {
     table.string('username').primary();
     table.integer('room').notNullable().defaultTo(1);
     // inventory: array of strings
-    table.specificType('inventory', 'text[]').defaultTo('{}');
+    table.specificType('inventory', 'text[]');
     // world_state: JSONB array of objects
-    table.jsonb('world_state').defaultTo('[]');
+    table.specificType('world_state', []);
     table.timestamps(true, true);
   });
 };
