@@ -159,7 +159,7 @@ app.get("/game/state", async (req: Request, res: Response) => {
 });
 
 app.post("/game/save", async (req: Request, res: Response) => {
-  const { name, inventory, world_state } = req.body;
+  const { name, inventory, worldState } = req.body;
 
   try {
     const worldResult = await pool.query(
@@ -169,7 +169,7 @@ app.post("/game/save", async (req: Request, res: Response) => {
       WHERE username = $2
       RETURNING world_state
       `,
-      [world_state, name]
+      [worldState, name]
     );
 
     if (worldResult.rows.length === 0) {
@@ -191,7 +191,7 @@ app.post("/game/save", async (req: Request, res: Response) => {
     }
 
     return res.json({
-      world_state: worldResult.rows[0].world_state,
+      worldState: worldResult.rows[0].worldState,
       inventory: invResult.rows[0].inventory,
     });
 
