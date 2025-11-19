@@ -153,7 +153,6 @@
     left: 31%;
     height: 30%;
     width: 13%;
-    background-color: red;
   }
 
   .opened-book {
@@ -168,7 +167,6 @@
   }
 
   .drawer-knob {
-    background-color: brown;
     height: 15%;
     width: 8%;
     top: 75%;
