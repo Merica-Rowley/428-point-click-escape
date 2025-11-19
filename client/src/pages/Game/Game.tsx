@@ -48,12 +48,9 @@ export default function Game() {
   };
 
   const handleSaveClick = () => {
-    setShouldSave(true);
       saveGame(user!.username, inventory, worldState)
       .then((data) => console.log("Game saved:", data))
       .catch((err) => console.error("Save failed:", err));
-
-      setShouldSave(false);
   };
 
   // useEffect(() => {
