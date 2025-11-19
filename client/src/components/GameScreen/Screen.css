@@ -134,6 +134,20 @@
     height: 39%;
   }
 
+  .lamp {
+    top: 24%;
+    left: 80.5%;
+    width: 12%;
+    height: 25%;
+  }
+
+  .lamp-on-off {
+    top: 24%;
+    left: 80.5%;
+    width: 12%;
+    height: 25%;
+  }
+
   .book {
     top: 10%;
     left: 20%;
@@ -274,12 +288,7 @@
   }
 
   .exitSafe {
-    /* top: 76%;
-    left: 45%;
-    width: 10%;
-    height: 10%; */
     z-index: 10;
-    /* background-color: orange; */
   }
 
   .screw-panel {
@@ -368,7 +377,6 @@
     left: 10%;
     background-color: purple;
   }
-
   .safeHandle {
     top: 50%;
     left: 50%;
@@ -397,6 +405,14 @@
 
 .screen-four-bg-one {
   background-image: url("../../assets/Screen4/bg1.png");
+}
+
+.screen-four-bg-light-off {
+  background-image: url("../../assets/Screen4/lightbulb-off.png");
+}
+
+.screen-four-bg-light-on {
+  background-image: url("../../assets/Screen4/lightbulb-on.png");
 }
 
 .screen-thermostat-bg {
