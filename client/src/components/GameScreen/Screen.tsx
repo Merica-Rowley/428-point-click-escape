@@ -123,6 +123,17 @@ export default function GameScreen(props: {
     setScreenIndex(6);
   };
 
+  const handleInstallLight = () => {
+    if (props.selectedItem === "lightbulb") {
+      props.toggleWorldFlag("lightbulbInstalled");
+      props.removeItem("lightbulb");
+    }
+  };
+
+  const handleLightSwitch = () => {
+    props.toggleWorldFlag("lampOn");
+  };
+
   const handleSheetMusicClick = () => {
     setPreviousScreenIndex(screenIndex);
     setScreenIndex(7);
@@ -335,9 +346,17 @@ export default function GameScreen(props: {
           )}
         </div>
       );
-    case 3: // desk overwold screen
+    case 3: // desk screen
+      let currentBg = "screen-four-bg-one";
+      if (checkWorldFlag("lightbulbInstalled")) {
+        if (checkWorldFlag("lampOn")) {
+          currentBg = "screen-four-bg-light-on";
+        } else {
+          currentBg = "screen-four-bg-light-off";
+        }
+      }
       return (
-        <div className={`background-container screen-four-bg-one`}>
+        <div className={`background-container ${currentBg}`}>
           <button className="goRight" onClick={() => handleGoRight()}>
             <img src={arrow} className="arrow-right" alt="right-arrow" />
           </button>
@@ -345,10 +364,25 @@ export default function GameScreen(props: {
           <button className="goLeft" onClick={() => handleGoLeft()}>
             <img src={arrow} className="arrow-left" alt="left-arrow" />
           </button>
+
           <button
             className="thermostatDeskButton"
             onClick={() => handleThermostatClick()}
           ></button>
+
+          {(!checkWorldFlag("lightbulbInstalled") && (
+            <button
+              className="lamp"
+              onClick={() => handleInstallLight()}
+            ></button>
+          )) ||
+            (checkWorldFlag("lightbulbInstalled") && (
+              <button
+                className="lamp-on-off"
+                onClick={() => handleLightSwitch()}
+              ></button>
+            ))}
+
           <button className="desk" onClick={() => handleGoDesk()}></button>
         </div>
       );
