@@ -161,6 +161,8 @@ app.get("/game/state", async (req: Request, res: Response) => {
 app.post("/game/save", async (req: Request, res: Response) => {
   const { name, inventory, worldState } = req.body;
 
+  console.log("inventory is ", inventory, "world state is ", worldState);
+
   try {
     const worldResult = await pool.query(
       `

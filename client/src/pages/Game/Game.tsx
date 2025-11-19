@@ -39,19 +39,18 @@ export default function Game() {
 
   const handleSaveClick = () => {
     setShouldSave(true);
-  };
-
-  useEffect(() => {
-  if (!shouldSave) return;
-
-  if (user) {
-    saveGame(user.username, inventory, worldState)
+      saveGame(user!.username, inventory, worldState)
       .then((data) => console.log("Game saved:", data))
       .catch((err) => console.error("Save failed:", err));
-  }
 
-  setShouldSave(false);
-  }, [shouldSave, worldState, inventory, user]);
+      setShouldSave(false);
+  };
+
+  // useEffect(() => {
+  // if (!shouldSave) return;
+
+  // if (user) {
+  // }, [shouldSave, worldState, inventory, user]);
 
   const toggleWorldFlag = (flagName: string) => {
     console.log("changing world state");
