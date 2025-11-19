@@ -78,8 +78,10 @@ export default function Game() {
     const res = await fetch(`${BASE_URL}/game/save`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, inventory, worldState }),
+      body: JSON.stringify({ name, inventory, world_state: worldState }),
     });
+
+    console.log("whats being sent, ", JSON.stringify({ name, inventory, worldState }))
 
     console.log("Username being sent: ", name)
 
