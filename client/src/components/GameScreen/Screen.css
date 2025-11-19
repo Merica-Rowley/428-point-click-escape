@@ -149,42 +149,34 @@
   }
 
   .book {
-    top: 10%;
-    left: 20%;
+    top: 22%;
+    left: 31%;
+    height: 30%;
+    width: 13%;
+    background-color: red;
   }
 
   .opened-book {
     position: absolute;
-    top: 10%;
-    left: 20%;
-    background-color: burlywood;
-    width: 150px;
-    height: 227px;
+    top: 22%;
+    left: 21%;
+    width: 10%;
+    height: 10%;
     display: flex;
     align-items: center;
-    border: 3px solid brown;
+    font-size: 93%;
   }
 
   .drawer-knob {
     background-color: brown;
-    height: 25px;
-    width: 25px;
-    top: 80%;
-    left: 50%;
-  }
-
-  .opened-drawer {
-    position: absolute;
-    top: 80%;
-    left: 25%;
     height: 15%;
-    width: 50%;
-    background-color: #654321;
+    width: 8%;
+    top: 75%;
+    left: 46%;
   }
 
   .drawer-button {
-    background-color: green;
-    top: 20%;
+    top: 76%;
     left: 15%;
   }
 
@@ -439,8 +431,20 @@
   background-image: url("../../assets/Thermostat/bg.png");
 }
 
-.screen-six-bg-one {
-  background-image: url("../../assets/Screen6/bg1.png");
+.screen-six-bg-both {
+  background-image: url(../../assets/Screen6/both.png);
+}
+
+.screen-six-bg-book {
+  background-image: url(../../assets/Screen6/book.png);
+}
+
+.screen-six-bg-drawer {
+  background-image: url(../../assets/Screen6/drawer.png);
+}
+
+.screen-six-bg-neither {
+  background-image: url(../../assets/Screen6/neither.png);
 }
 
 .screen-seven-bg {

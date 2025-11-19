@@ -8,7 +8,6 @@ import lightbulb from "../../assets/Screen3/lightbulb.png";
 import lightbulbChain from "../../assets/Screen3/lightbulb-chain.png";
 import plus from "../../assets/Thermostat/plus.png";
 import minus from "../../assets/Thermostat/minus.png";
-import closedBook from "../../assets/Screen6/closed-book.png";
 import painting from "../../assets/Screen2/painting.png";
 import panel from "../../assets/Safe/panel.png";
 import type { item, worldFlag } from "../../pages/Game/Game";
@@ -434,30 +433,46 @@ export default function GameScreen(props: {
         </>
       );
     case 6: // desktop //desk subscreen
-      //TODO: still need bg assets for this one
+      function getDeskBgState(): string {
+        const book = checkWorldFlag("openedBook");
+        const drawer = checkWorldFlag("openedDrawer");
+        if (book && drawer) {
+          return "screen-six-bg-both";
+        } else if (book) {
+          return "screen-six-bg-book";
+        } else if (drawer) {
+          return "screen-six-bg-drawer";
+        } else {
+          return "screen-six-bg-neither";
+        }
+      }
+
+      function handleDrawerButtonClick() {
+        props.toggleWorldFlag("drawerButtonPickedUp");
+        props.onPickUpItem("button");
+      }
+
       return (
-        <div className={`background-container screen-six-bg-one`}>
+        <div className={"background-container " + getDeskBgState()}>
           {checkWorldFlag("openedBook") ? (
-            <div className="opened-book">K4t4r4W4t3rB3nd3r!</div>
+            <div className="opened-book">W4t3rB3nd3r!</div>
           ) : (
             <button
               className="book"
               onClick={() => props.toggleWorldFlag("openedBook")}
-            >
-              <img src={closedBook} alt="book" />
-            </button>
+            ></button>
           )}
           {checkWorldFlag("openedDrawer") ? (
-            <div className="opened-drawer">
-              {!props.inventory.find((i) => i.name === "drawer-button") && (
+            <>
+              {!checkWorldFlag("drawerButtonPickedUp") && (
                 <button
                   className="drawer-button"
-                  onClick={() => props.onPickUpItem("drawer-button")}
+                  onClick={() => handleDrawerButtonClick()}
                 >
-                  ButtonPlaceholder
+                  <img src={button} alt="button" />
                 </button>
               )}
-            </div>
+            </>
           ) : (
             <button
               className="drawer-knob"
