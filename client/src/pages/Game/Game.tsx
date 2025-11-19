@@ -23,7 +23,7 @@ export default function Game() {
   const [inventory, setInventory] = useState<item[]>([]);
   const [worldState, setWorldState] = useState<worldFlag[]>([]);
   const [selectedItem, setSelectedItem] = useState<string>("");
-  const [shouldSave, setShouldSave] = useState(false);
+  // const [shouldSave, setShouldSave] = useState(false);
   const { user } = useAuth();
 
   useEffect(() => {
