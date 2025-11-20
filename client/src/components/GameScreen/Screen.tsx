@@ -314,9 +314,16 @@ export default function GameScreen(props: {
 
 
             {checkWorldFlag("passwordEntered") ? (
-              <button className="redButton" onClick={() => handlePasswordButton()}>
-                {/* <img src={door} alt="trapdoor" /> */}
-              </button>
+              <>
+              {!checkWorldFlag("TrapdoorButtonAcquired") && (
+                <button
+                  className="redButton"
+                  onClick={() => handlePasswordButton()}
+                >
+                  <img src={button} alt="button" />
+                </button>
+              )}
+              </>
             ) : (
               <>
               <input
@@ -329,6 +336,7 @@ export default function GameScreen(props: {
                 className="submitPassWord"
                 onClick={() => handlePasswordSubmit()}
               >
+                SUBMIT
               </button>
               </>
             )}

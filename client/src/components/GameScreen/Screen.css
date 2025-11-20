@@ -68,7 +68,7 @@
     left: 77.5%;
     width: 10%;
     height: 37%;
-    background-color: purple;
+    /* background-color: purple; */
   }
 
   .trapDoorButton {
@@ -94,7 +94,7 @@
     left: 10%;
     width: 5%;
     height: 10%;
-    background-color: red;
+    /* background-color: red; */
   }
 
   .submitPassWord {
@@ -104,6 +104,7 @@
     width: 15%;
     height: 8%;
     background-color: black;
+    color: white;
   }
 
   .thermostatFireplaceButton {
