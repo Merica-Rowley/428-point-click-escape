@@ -25,6 +25,8 @@ import a1sound from "../../assets/Screen8/sounds/a.wav";
 import a1sharpsound from "../../assets/Screen8/sounds/a-sharp.wav";
 import b1sound from "../../assets/Screen8/sounds/b.wav";
 import c2sound from "../../assets/Screen8/sounds/c2.wav";
+import hole from "../../assets/Screen3/holeinthewall.png";
+import button from "../../assets/button.png";
 
 export default function GameScreen(props: {
   inventory: item[];
@@ -50,9 +52,18 @@ export default function GameScreen(props: {
   useEffect(() => {
     if (pianoNotes.toString() === correctPianoSequence.toString()) {
       props.toggleWorldFlag("showLightbulb");
-      console.log("correct sequence played, show the lightbulb");
     }
   }, [pianoNotes]);
+
+  useEffect(() => {
+    if (
+      temperatures[2] === 59 &&
+      temperatures[0] === 78 &&
+      temperatures[1] === 62
+    ) {
+      props.toggleWorldFlag("correctTemperaturesSet");
+    }
+  }, [temperatures]);
 
   const checkWorldFlag = (flagName: string) => {
     return props.worldState.some((f) => f.name === flagName && f.state);
@@ -329,7 +340,8 @@ export default function GameScreen(props: {
             </button>
           )}
 
-          {checkWorldFlag("showLightbulb") &&
+          {!checkWorldFlag("lightbulbInstalled") &&
+            checkWorldFlag("showLightbulb") &&
             !props.inventory.find((i) => i.name === "lightbulb") && (
               <button
                 className="lightbulbButton"
@@ -343,6 +355,22 @@ export default function GameScreen(props: {
             <button className="lightbulbChain">
               <img src={lightbulbChain} alt="lightbulbChain" />
             </button>
+          )}
+
+          {checkWorldFlag("correctTemperaturesSet") && (
+            <>
+              <div className="hole-in-the-wall">
+                <img src={hole} alt="hole in the wall" />
+              </div>
+              {!props.inventory.find((i) => i.name === "piano-button") && (
+                <button
+                  className="piano-hole-button"
+                  onClick={() => props.onPickUpItem("piano-button")}
+                >
+                  <img src={button} alt="piano button" />
+                </button>
+              )}
+            </>
           )}
         </div>
       );
