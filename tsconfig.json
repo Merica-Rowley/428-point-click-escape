@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "rootDir": "server",
+    "outDir": "dist/server",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["server/**/*.ts"],     // only include server TS files
+  "exclude": ["server/tests", "**/*.test.ts", "jest.config.js", "knexfile.ts"]
+}
+

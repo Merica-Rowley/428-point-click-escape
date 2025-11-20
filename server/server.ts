@@ -49,13 +49,13 @@ app.post("/auth/register", async (req: Request, res: Response) => {
     // Insert save state file
     const world_result = await pool.query(
       "INSERT INTO save_state (username, inventory, room, world_state) VALUES ($1, $2, $3, $4)",
-      [name, [], 1, [["Button in Drawer", false], ["Trap Door Visible", false], ["Password Entered", false], ["Trap Door Button Present", false], ["Painting Fallen", false], ["Screwdriver in Tank", false], ["Unscrewed Safe", false], ["First Button on Safe", false], ["Second Button on Safe", false], ["Third Button on Safe", false], ["Key in Safe", false], ["Lightbulb Down", false], ["Lightbulb Clicked", false], ["Lightbulb in Lamp", false], ["Panel on Wall Opened", false], ["Lamp on", false], ["Button in Panel Clicked", false], ["Code in Thermo 1", false], ["Code in Thermo 2", false], ["Code in Thermo 3", false]]]
+      [name, [], 1, []]
     );
 
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in register" });
   }
 });
 
@@ -75,7 +75,7 @@ app.post("/auth/login", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in login" });
   }
 });
 
@@ -91,7 +91,7 @@ app.get("/game/inventory", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in getting inventory" });
   }
 });
 
@@ -121,7 +121,7 @@ app.post("/game/inventory", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in posting inventory" });
   }
 });
 
@@ -138,7 +138,7 @@ app.get("/game/room", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in getting room" });
   }
 });
 
@@ -154,15 +154,17 @@ app.get("/game/state", async (req: Request, res: Response) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).json({ error: "Database error in getting state" });
   }
 });
 
-app.post("/game/state", async (req: Request, res: Response) => {
-  const { name, world_state } = req.body;
+app.post("/game/save", async (req: Request, res: Response) => {
+  const { name, inventory, world_state } = req.body;
+
+  console.log("inventory is ", inventory, "world state is ", world_state);
 
   try {
-    const result = await pool.query(
+    const worldResult = await pool.query(
       `
       UPDATE save_state
       SET world_state = $1
@@ -172,14 +174,35 @@ app.post("/game/state", async (req: Request, res: Response) => {
       [world_state, name]
     );
 
-    if (result.rows.length === 0) {
+    if (worldResult.rows.length === 0) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    res.json(result.rows[0]);
+    const invResult = await pool.query(
+
+      `
+      UPDATE save_state
+      SET inventory = $1
+      WHERE username = $2
+      RETURNING inventory
+      `,
+      [inventory, name]
+    );
+
+    if (invResult.rows.length === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.json({
+      worldState: worldResult.rows[0].world_state,
+      inventory: invResult.rows[0].inventory,
+    });
+
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Database error" });
+    return res
+      .status(500)
+      .json({ error: "Database error while saving game state" });
   }
 });
 

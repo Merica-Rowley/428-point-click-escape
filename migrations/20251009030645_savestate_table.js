@@ -1,20 +1,16 @@
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
 exports.up = function(knex) {
   return knex.schema.createTable('save_state', (table) => {
-    table.string('room').primary();      
-    table.string('inventory').notNullable();
-    table.string('world_state').notNullable();
-    table.timestamps(true, true);          // created_at and updated_at
+    table.string('username').primary();
+    table.integer('room').notNullable().defaultTo(1);
+    // inventory: array of strings
+    table.specificType('inventory', 'text[]');
+    // world_state: JSONB array of objects
+    table.specificType('world_state', []);
+    table.timestamps(true, true);
   });
 };
 
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
 exports.down = function(knex) {
   return knex.schema.dropTableIfExists('save_state');
 };
+
