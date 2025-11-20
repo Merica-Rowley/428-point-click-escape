@@ -224,6 +224,15 @@ export default function GameScreen(props: {
     }
   };
 
+  const handleTrapdoorClick = () => {
+    setPreviousScreenIndex(screenIndex);
+    setScreenIndex(10); // Arbitrarily assign trapdoor screen index to 10
+  }
+  const [inputValue, setInputValue] = useState("");
+      const handlePassword = (event: any) => {
+        setInputValue(event.target.value)
+      }
+
   switch (screenIndex) {
     case 0: // door
       return (
@@ -234,6 +243,17 @@ export default function GameScreen(props: {
               : "screen-one-bg-one"
           }`}
         >
+          {checkWorldFlag("trapdoorShown") ? (
+            <button className="trapDoorButton" onClick={() => handleTrapdoorClick()}>
+              {/* <img src={door} alt="trapdoor" /> */}
+            </button>
+          ) : (
+            <button
+              className="lavaLampButton"
+              onClick={() => props.toggleWorldFlag("trapdoorShown")}
+            >
+            </button>
+          )}
           <button className="doorButton" onClick={() => handleDoorClick()}>
             <img src={door} alt="door" />
           </button>
@@ -254,6 +274,52 @@ export default function GameScreen(props: {
           {showWin && <h1 className="win-text">YOU WIN</h1>}
         </div>
       );
+      case 10:  // trapdoor
+      const handlePasswordSubmit = () => {
+        if (inputValue === "W4t3rB3nd3r!")
+        {
+          props.toggleWorldFlag("passwordEntered")
+        }
+
+      };
+      const handlePasswordButton = () => {
+        props.toggleWorldFlag("TrapdoorButtonAcquired")
+        props.onPickUpItem("button")
+      }
+        return (
+          <div className={`background-container screen-ten-bg-one`}>
+
+
+
+
+            {checkWorldFlag("passwordEntered") ? (
+              <button className="redButton" onClick={() => handlePasswordButton()}>
+                {/* <img src={door} alt="trapdoor" /> */}
+              </button>
+            ) : (
+              <>
+              <input
+              type="text"
+              value={inputValue}
+              onChange={handlePassword}
+              className="passWord"
+              />
+              <button
+                className="submitPassWord"
+                onClick={() => handlePasswordSubmit()}
+              >
+              </button>
+              </>
+            )}
+
+
+
+
+            <button className="getOut" onClick={() => handleGetOutClick()}>
+              <img src={arrow} className="arrow-down" alt="back-arrow" />
+            </button>
+          </div>
+        );
     case 1: // fireplace
       return (
         <div className={`background-container screen-two-bg-one`}>

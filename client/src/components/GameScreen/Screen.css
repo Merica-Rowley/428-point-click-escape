@@ -60,6 +60,50 @@
     left: 85%;
     width: 10%;
     height: 13%;
+    /* background-color: blue; */
+  }
+
+  .lavaLampButton {
+    top: 37%;
+    left: 77.5%;
+    width: 10%;
+    height: 37%;
+    background-color: purple;
+  }
+
+  .trapDoorButton {
+    top: 92%;
+    left: 16.5%;
+    width: 20%;
+    height: 7%;
+    background-color: green;
+  }
+
+  .passWord {
+    position: absolute;
+    top: 56%;
+    left: 42.5%;
+    width: 15%;
+    height: 8%;
+    background-color: grey;
+  }
+
+  .redButton {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    width: 5%;
+    height: 10%;
+    background-color: red;
+  }
+
+  .submitPassWord {
+    position: absolute;
+    top: 66%;
+    left: 42.5%;
+    width: 15%;
+    height: 8%;
+    background-color: black;
   }
 
   .thermostatFireplaceButton {
@@ -413,6 +457,10 @@
 
 .screen-eight-bg {
   background-image: url("../../assets/Screen8/bg1.png");
+}
+
+.screen-ten-bg-one {
+  background-image: url("../../assets/Screen10/screen-ten-bg-one.png")
 }
 
 .win-text {
