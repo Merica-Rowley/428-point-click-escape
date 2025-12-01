@@ -80,7 +80,11 @@ app.post("/auth/login", async (req: Request, res: Response) => {
 });
 
 app.get("/game/inventory", async (req: Request, res: Response) => {
-  const { name } = req.body;
+  const name = req.query.name as string;
+
+  if (!name) {
+    return res.status(400).json({ error: "Missing username" });
+  }
 
   try {
     const result = await pool.query("SELECT inventory FROM save_state WHERE username = $1", [name]);
