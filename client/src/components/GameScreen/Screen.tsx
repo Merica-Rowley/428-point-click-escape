@@ -8,7 +8,6 @@ import lightbulb from "../../assets/Screen3/lightbulb.png";
 import lightbulbChain from "../../assets/Screen3/lightbulb-chain.png";
 import plus from "../../assets/Thermostat/plus.png";
 import minus from "../../assets/Thermostat/minus.png";
-import closedBook from "../../assets/Screen6/closed-book.png";
 import painting from "../../assets/Screen2/painting.png";
 import panel from "../../assets/Safe/panel.png";
 import type { item, worldFlag } from "../../pages/Game/Game";
@@ -218,13 +217,14 @@ export default function GameScreen(props: {
   const handleScrewClick = () => {
     if (props.selectedItem === "screwdriver") {
       props.toggleWorldFlag("unscrewedPanel");
+      props.removeItem("screwdriver");
     }
   };
 
   const handleSocketClick = (sockNum: number) => {
-    if (props.selectedItem === "drawer-button") {
+    if (props.selectedItem === "button") {
       props.toggleWorldFlag(`placedButton${sockNum}`);
-      props.removeItem("drawer-button");
+      props.removeItem("button");
     }
   };
 
@@ -246,6 +246,15 @@ export default function GameScreen(props: {
     }
   };
 
+  const handleTrapdoorClick = () => {
+    setPreviousScreenIndex(screenIndex);
+    setScreenIndex(10); // Arbitrarily assign trapdoor screen index to 10
+  };
+  const [inputValue, setInputValue] = useState("");
+  const handlePassword = (event: any) => {
+    setInputValue(event.target.value);
+  };
+
   switch (screenIndex) {
     case 0: // door
       return (
@@ -256,6 +265,19 @@ export default function GameScreen(props: {
               : "screen-one-bg-one"
           }`}
         >
+          {checkWorldFlag("trapdoorShown") ? (
+            <button
+              className="trapDoorButton"
+              onClick={() => handleTrapdoorClick()}
+            >
+              {/* <img src={door} alt="trapdoor" /> */}
+            </button>
+          ) : (
+            <button
+              className="lavaLampButton"
+              onClick={() => props.toggleWorldFlag("trapdoorShown")}
+            ></button>
+          )}
           <button className="doorButton" onClick={() => handleDoorClick()}>
             <img src={door} alt="door" />
           </button>
@@ -274,6 +296,51 @@ export default function GameScreen(props: {
           ></button>
 
           {showWin && <h1 className="win-text">YOU WIN</h1>}
+        </div>
+      );
+    case 10: // trapdoor
+      const handlePasswordSubmit = () => {
+        if (inputValue === "W4t3rB3nd3r!") {
+          props.toggleWorldFlag("passwordEntered");
+        }
+      };
+      const handlePasswordButton = () => {
+        props.toggleWorldFlag("TrapdoorButtonAcquired");
+        props.onPickUpItem("button");
+      };
+      return (
+        <div className={`background-container screen-ten-bg-one`}>
+          {checkWorldFlag("passwordEntered") ? (
+            <>
+              {!checkWorldFlag("TrapdoorButtonAcquired") && (
+                <button
+                  className="redButton"
+                  onClick={() => handlePasswordButton()}
+                >
+                  <img src={button} alt="button" />
+                </button>
+              )}
+            </>
+          ) : (
+            <>
+              <input
+                type="text"
+                value={inputValue}
+                onChange={handlePassword}
+                className="passWord"
+              />
+              <button
+                className="submitPassWord"
+                onClick={() => handlePasswordSubmit()}
+              >
+                SUBMIT
+              </button>
+            </>
+          )}
+
+          <button className="getOut" onClick={() => handleGetOutClick()}>
+            <img src={arrow} className="arrow-down" alt="back-arrow" />
+          </button>
         </div>
       );
     case 1: // fireplace
@@ -433,31 +500,47 @@ export default function GameScreen(props: {
           </div>
         </>
       );
-    case 6: // desktop //desk subscreen
-      //TODO: still need bg assets for this one
+    case 6: // desk subscreen
+      function getDeskBgState(): string {
+        const book = checkWorldFlag("openedBook");
+        const drawer = checkWorldFlag("openedDrawer");
+        if (book && drawer) {
+          return "screen-six-bg-both";
+        } else if (book) {
+          return "screen-six-bg-book";
+        } else if (drawer) {
+          return "screen-six-bg-drawer";
+        } else {
+          return "screen-six-bg-neither";
+        }
+      }
+
+      function handleDrawerButtonClick() {
+        props.toggleWorldFlag("drawerButtonPickedUp");
+        props.onPickUpItem("button");
+      }
+
       return (
-        <div className={`background-container screen-six-bg-one`}>
+        <div className={"background-container " + getDeskBgState()}>
           {checkWorldFlag("openedBook") ? (
-            <div className="opened-book">K4t4r4W4t3rB3nd3r!</div>
+            <div className="opened-book">W4t3rB3nd3r!</div>
           ) : (
             <button
               className="book"
               onClick={() => props.toggleWorldFlag("openedBook")}
-            >
-              <img src={closedBook} alt="book" />
-            </button>
+            ></button>
           )}
           {checkWorldFlag("openedDrawer") ? (
-            <div className="opened-drawer">
-              {!props.inventory.find((i) => i.name === "drawer-button") && (
+            <>
+              {!checkWorldFlag("drawerButtonPickedUp") && (
                 <button
                   className="drawer-button"
-                  onClick={() => props.onPickUpItem("drawer-button")}
+                  onClick={() => handleDrawerButtonClick()}
                 >
-                  ButtonPlaceholder
+                  <img src={button} alt="button" />
                 </button>
               )}
-            </div>
+            </>
           ) : (
             <button
               className="drawer-knob"
@@ -543,7 +626,13 @@ export default function GameScreen(props: {
       );
     case 9: // Safe subscreen
       return (
-        <div className={`background-container screen-safe-bg`}>
+        <div
+          className={`background-container ${
+            checkWorldFlag("safeOpen")
+              ? "screen-nine-bg-two"
+              : "screen-nine-bg-one"
+          }`}
+        >
           <button
             className="getOut exitSafe"
             onClick={() => handleGetOutClick()}
@@ -614,12 +703,6 @@ export default function GameScreen(props: {
                     className="safeHandle"
                     onClick={() => handleSafeOpen()}
                   ></button>
-                  <button
-                    className="testButton"
-                    onClick={() => props.onPickUpItem("button")}
-                  >
-                    DELETE THIS
-                  </button>
                 </>
               )}
             </>
@@ -636,15 +719,15 @@ export default function GameScreen(props: {
               ></button>
               <button
                 className="screw2"
-                onClick={() => props.toggleWorldFlag("unscrewedPanel")}
+                onClick={() => handleScrewClick()}
               ></button>
               <button
                 className="screw3"
-                onClick={() => props.toggleWorldFlag("unscrewedPanel")}
+                onClick={() => handleScrewClick()}
               ></button>
               <button
                 className="screw4"
-                onClick={() => props.toggleWorldFlag("unscrewedPanel")}
+                onClick={() => handleScrewClick()}
               ></button>
             </>
           )}

@@ -14,8 +14,8 @@
   }
 
   .keyButton {
-    top: 63%;
-    left: 85%;
+    top: 65%;
+    left: 75%;
   }
 
   .doorButton {
@@ -60,6 +60,51 @@
     left: 85%;
     width: 10%;
     height: 13%;
+    /* background-color: blue; */
+  }
+
+  .lavaLampButton {
+    top: 37%;
+    left: 77.5%;
+    width: 10%;
+    height: 37%;
+    /* background-color: purple; */
+  }
+
+  .trapDoorButton {
+    top: 92%;
+    left: 16.5%;
+    width: 20%;
+    height: 7%;
+    background-color: green;
+  }
+
+  .passWord {
+    position: absolute;
+    top: 56%;
+    left: 42.5%;
+    width: 15%;
+    height: 8%;
+    background-color: grey;
+  }
+
+  .redButton {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    width: 5%;
+    height: 10%;
+    /* background-color: red; */
+  }
+
+  .submitPassWord {
+    position: absolute;
+    top: 66%;
+    left: 42.5%;
+    width: 15%;
+    height: 8%;
+    background-color: black;
+    color: white;
   }
 
   .thermostatFireplaceButton {
@@ -149,42 +194,32 @@
   }
 
   .book {
-    top: 10%;
-    left: 20%;
+    top: 22%;
+    left: 31%;
+    height: 30%;
+    width: 13%;
   }
 
   .opened-book {
     position: absolute;
-    top: 10%;
-    left: 20%;
-    background-color: burlywood;
-    width: 150px;
-    height: 227px;
+    top: 22%;
+    left: 21%;
+    width: 10%;
+    height: 10%;
     display: flex;
     align-items: center;
-    border: 3px solid brown;
+    font-size: 93%;
   }
 
   .drawer-knob {
-    background-color: brown;
-    height: 25px;
-    width: 25px;
-    top: 80%;
-    left: 50%;
-  }
-
-  .opened-drawer {
-    position: absolute;
-    top: 80%;
-    left: 25%;
     height: 15%;
-    width: 50%;
-    background-color: #654321;
+    width: 8%;
+    top: 75%;
+    left: 46%;
   }
 
   .drawer-button {
-    background-color: green;
-    top: 20%;
+    top: 76%;
     left: 15%;
   }
 
@@ -346,63 +381,71 @@
   }
 
   .buttonColor0 {
-    background-color: pink;
+    background-image: url("../../assets/button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
   .buttonColor1 {
-    background-color: orange;
+    background-image: url("../../assets/button-orange.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
   .buttonColor2 {
-    background-color: blue;
+    background-image: url("../../assets/button-blue.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
   .buttonColor3 {
-    background-color: green;
+    background-image: url("../../assets/button-green.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   .button1 {
-    height: 12%;
-    width: 7%;
-    top: 10%;
-    left: 10%;
+    height: 18%;
+    width: 11%;
+    top: 20%;
+    left: 19%;
   }
   .socket1 {
-    height: 12%;
-    width: 7%;
-    top: 10%;
-    left: 10%;
-    background-color: purple;
+    height: 18%;
+    width: 11%;
+    top: 20%;
+    left: 19%;
   }
   .button2 {
-    height: 12%;
-    width: 7%;
-    top: 50%;
-    left: 10%;
+    height: 18%;
+    width: 11%;
+    top: 41%;
+    left: 19%;
   }
   .socket2 {
-    height: 12%;
-    width: 7%;
-    top: 50%;
-    left: 10%;
-    background-color: purple;
+    height: 18%;
+    width: 11%;
+    top: 41%;
+    left: 19%;
   }
   .button3 {
-    height: 12%;
-    width: 7%;
-    top: 85%;
-    left: 10%;
+    height: 18%;
+    width: 11%;
+    top: 63%;
+    left: 19%;
   }
   .socket3 {
-    height: 12%;
-    width: 7%;
-    top: 85%;
-    left: 10%;
-    background-color: purple;
+    height: 18%;
+    width: 11%;
+    top: 63%;
+    left: 19%;
   }
   .safeHandle {
-    top: 50%;
-    left: 50%;
+    top: 30%;
+    left: 58%;
     width: 20%;
-    height: 20%;
-    background-color: aqua;
+    height: 40%;
   }
 }
 
@@ -439,8 +482,20 @@
   background-image: url("../../assets/Thermostat/bg.png");
 }
 
-.screen-six-bg-one {
-  background-image: url("../../assets/Screen6/bg1.png");
+.screen-six-bg-both {
+  background-image: url(../../assets/Screen6/both.png);
+}
+
+.screen-six-bg-book {
+  background-image: url(../../assets/Screen6/book.png);
+}
+
+.screen-six-bg-drawer {
+  background-image: url(../../assets/Screen6/drawer.png);
+}
+
+.screen-six-bg-neither {
+  background-image: url(../../assets/Screen6/neither.png);
 }
 
 .screen-seven-bg {
@@ -449,6 +504,18 @@
 
 .screen-eight-bg {
   background-image: url("../../assets/Screen8/bg1.png");
+}
+
+.screen-nine-bg-one {
+  background-image: url(../../assets/Screen9/vaultClosed.png);
+}
+
+.screen-nine-bg-two {
+  background-image: url(../../assets/Screen9/vaultOpen.png);
+}
+
+.screen-ten-bg-one {
+  background-image: url("../../assets/Screen10/screen-ten-bg-one.png");
 }
 
 .win-text {
