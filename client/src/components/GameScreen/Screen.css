@@ -14,8 +14,8 @@
   }
 
   .keyButton {
-    top: 63%;
-    left: 85%;
+    top: 65%;
+    left: 75%;
   }
 
   .doorButton {
@@ -381,63 +381,71 @@
   }
 
   .buttonColor0 {
-    background-color: pink;
+    background-image: url("../../assets/button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
   .buttonColor1 {
-    background-color: orange;
+    background-image: url("../../assets/button-orange.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
   .buttonColor2 {
-    background-color: blue;
+    background-image: url("../../assets/button-blue.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
   .buttonColor3 {
-    background-color: green;
+    background-image: url("../../assets/button-green.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   .button1 {
-    height: 12%;
-    width: 7%;
-    top: 10%;
-    left: 10%;
+    height: 18%;
+    width: 11%;
+    top: 20%;
+    left: 19%;
   }
   .socket1 {
-    height: 12%;
-    width: 7%;
-    top: 10%;
-    left: 10%;
-    background-color: purple;
+    height: 18%;
+    width: 11%;
+    top: 20%;
+    left: 19%;
   }
   .button2 {
-    height: 12%;
-    width: 7%;
-    top: 50%;
-    left: 10%;
+    height: 18%;
+    width: 11%;
+    top: 41%;
+    left: 19%;
   }
   .socket2 {
-    height: 12%;
-    width: 7%;
-    top: 50%;
-    left: 10%;
-    background-color: purple;
+    height: 18%;
+    width: 11%;
+    top: 41%;
+    left: 19%;
   }
   .button3 {
-    height: 12%;
-    width: 7%;
-    top: 85%;
-    left: 10%;
+    height: 18%;
+    width: 11%;
+    top: 63%;
+    left: 19%;
   }
   .socket3 {
-    height: 12%;
-    width: 7%;
-    top: 85%;
-    left: 10%;
-    background-color: purple;
+    height: 18%;
+    width: 11%;
+    top: 63%;
+    left: 19%;
   }
   .safeHandle {
-    top: 50%;
-    left: 50%;
+    top: 30%;
+    left: 58%;
     width: 20%;
-    height: 20%;
-    background-color: aqua;
+    height: 40%;
   }
 }
 
@@ -498,8 +506,16 @@
   background-image: url("../../assets/Screen8/bg1.png");
 }
 
+.screen-nine-bg-one {
+  background-image: url(../../assets/Screen9/vaultClosed.png);
+}
+
+.screen-nine-bg-two {
+  background-image: url(../../assets/Screen9/vaultOpen.png);
+}
+
 .screen-ten-bg-one {
-  background-image: url("../../assets/Screen10/screen-ten-bg-one.png")
+  background-image: url("../../assets/Screen10/screen-ten-bg-one.png");
 }
 
 .win-text {
