@@ -147,7 +147,11 @@ app.get("/game/room", async (req: Request, res: Response) => {
 });
 
 app.get("/game/state", async (req: Request, res: Response) => {
-  const { name } = req.body;
+  const name = req.query.name as string;
+
+  if (!name) {
+    return res.status(400).json({ error: "Missing username" });
+  }
 
   try {
     const result = await pool.query("SELECT world_state FROM save_state WHERE username = $1", [name]);
