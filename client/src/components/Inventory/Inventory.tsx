@@ -25,9 +25,11 @@ export default function Inventory(props: {
         return <img src={screwdriver} alt="screwdriver" />;
       case "lightbulb":
         return <img src={lightbulb} alt="lightbulb" />;
-      case "drawer-button":
-        return <img src={button} alt="button" />;
-      case "piano-button":
+      // case "drawer-button":
+      //   return <img src={button} alt="button" />;
+      // case "piano-button":
+      //   return <img src={button} alt="button" />;
+      case "button":
         return <img src={button} alt="button" />;
       default:
         return null;

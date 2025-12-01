@@ -250,7 +250,9 @@ export default function GameScreen(props: {
     setPreviousScreenIndex(screenIndex);
     setScreenIndex(10); // Arbitrarily assign trapdoor screen index to 10
   };
+
   const [inputValue, setInputValue] = useState("");
+
   const handlePassword = (event: any) => {
     setInputValue(event.target.value);
   };
@@ -380,6 +382,11 @@ export default function GameScreen(props: {
         </div>
       );
     case 2: // piano
+      function handlePianoButtonClick() {
+        props.toggleWorldFlag("pianoButtonPickedUp");
+        props.onPickUpItem("button");
+      }
+
       return (
         <div className={`background-container screen-three-bg-one`}>
           <button className="goRight" onClick={() => handleGoRight()}>
@@ -429,12 +436,20 @@ export default function GameScreen(props: {
               <div className="hole-in-the-wall">
                 <img src={hole} alt="hole in the wall" />
               </div>
-              {!props.inventory.find((i) => i.name === "piano-button") && (
+              {/* {!props.inventory.find((i) => i.name === "piano-button") && (
                 <button
                   className="piano-hole-button"
                   onClick={() => props.onPickUpItem("piano-button")}
                 >
                   <img src={button} alt="piano button" />
+                </button>
+              )} */}
+              {!checkWorldFlag("pianoButtonPickedUp") && (
+                <button
+                  className="piano-hole-button"
+                  onClick={() => handlePianoButtonClick()}
+                >
+                  <img src={button} alt="button" />
                 </button>
               )}
             </>
