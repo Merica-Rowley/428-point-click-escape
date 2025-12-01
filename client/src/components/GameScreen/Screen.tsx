@@ -432,7 +432,7 @@ export default function GameScreen(props: {
               {!props.inventory.find((i) => i.name === "piano-button") && (
                 <button
                   className="piano-hole-button"
-                  onClick={() => props.onPickUpItem("button")}
+                  onClick={() => props.onPickUpItem("piano-button")}
                 >
                   <img src={button} alt="piano button" />
                 </button>
