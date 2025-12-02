@@ -15,7 +15,7 @@ const STORAGE_KEY = "demo_auth_user";
 const BASE_URL = "https://four28-point-click-escape.onrender.com";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const { inventory, setInventory, worldState, setWorldState } = useGame();
+  const { setInventory, setWorldState } = useGame();
   const [user, setUser] = useState<User | null>(() => {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? (JSON.parse(raw) as User) : null;
