@@ -4,6 +4,7 @@ import GameScreen from "../../components/GameScreen/Screen";
 import Inventory from "../../components/Inventory/Inventory";
 import "./Game.css";
 import { useAuth } from "../../components/auth/AuthProvider";
+import { useGame } from "../../pages/Game/GameContext";
 
 const BASE_URL = "https://four28-point-click-escape.onrender.com";
 
@@ -17,13 +18,8 @@ export type worldFlag = {
 };
 
 export default function Game() {
-  // const allItems: item[] = [{ name: "key" }] as const;
-  // Commented this out to make the linter happy for the CI on first demo; uncomment it when needed
-
-  const [inventory, setInventory] = useState<item[]>([]);
-  const [worldState, setWorldState] = useState<worldFlag[]>([]);
-  const [selectedItem, setSelectedItem] = useState<string>("");
-  // const [shouldSave, setShouldSave] = useState(false);
+  const { inventory, setInventory, worldState, setWorldState } = useGame();
+  const [selectedItem, setSelectedItem] = useState<string>(""); 
   const { user } = useAuth();
 
   useEffect(() => {
@@ -31,9 +27,12 @@ export default function Game() {
   }, [worldState]);
 
   const pickUpItem = (itemName: string) => {
-    // Only add if inventory not full
     if (inventory.length < 5) {
-      setInventory([...inventory, { name: itemName }]);
+      setInventory(prev => {
+        const newInventory = [...prev, { name: itemName }];
+        console.log("Inventory has been updated! It's now ... ", newInventory);
+        return newInventory;
+      });
     }
   };
 

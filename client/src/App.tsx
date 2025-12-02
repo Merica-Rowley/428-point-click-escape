@@ -5,9 +5,11 @@ import Home from "./pages/Home";
 import { AuthProvider } from "./components/auth/AuthProvider";
 import RequireAuth from "./components/auth/RequireAuth";
 import Game from "./pages/Game/Game";
+import { GameProvider } from "./pages/Game/GameContext";
 
 function App() {
   return (
+    <GameProvider>
     <AuthProvider>
       <div className="app-shell">
         <main className="container">
@@ -26,6 +28,7 @@ function App() {
         </main>
       </div>
     </AuthProvider>
+    </GameProvider>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useMemo, useState, useContext, createContext, type ReactNode } from "react";
+import { useGame } from "../../pages/Game/GameContext";
 // import { AuthContext, STORAGE_KEY, type User, type AuthContextType } from "./AuthHelper";
 type User = { id: string | number ; username: string };
 type AuthContextType = {
@@ -14,6 +15,7 @@ const STORAGE_KEY = "demo_auth_user";
 const BASE_URL = "https://four28-point-click-escape.onrender.com";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+  const { inventory, setInventory, worldState, setWorldState } = useGame();
   const [user, setUser] = useState<User | null>(() => {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? (JSON.parse(raw) as User) : null;
@@ -37,6 +39,52 @@ const signIn = async (name: string) => {
   setUser(data);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   console.log("The user is here ...", data);
+
+  // Part 2, loading the inventory
+  const inventoryRes = await fetch(
+    `${BASE_URL}/game/inventory?name=${encodeURIComponent(name)}`
+  );
+
+
+  const inventoryData = await inventoryRes.json();
+  console.log("Here's the inventory data: ", inventoryData);
+  const inventoryParsed = (inventoryData.inventory || []).map((i: string) =>
+    typeof i === "string" ? JSON.parse(i) : i
+  );
+
+  console.log("The parsed inventory is ... ", inventoryParsed);
+
+
+  if (!inventoryRes.ok) {
+    throw new Error(inventoryData.error || "Failed to load inventory");
+  }
+
+  setInventory(inventoryParsed || []); 
+
+
+  // Part 3, loading save state
+  const saveRes = await fetch(
+    `${BASE_URL}/game/state?name=${encodeURIComponent(name)}`
+  );
+
+  const saveData = await saveRes.json();
+
+  console.log("SaveState Retrieval Data: ", saveData);
+
+  if (!saveRes.ok) {
+    throw new Error(data.error || "Failed to load save state");
+  }
+
+  console.log("Raw worldState from DB:", saveData);
+
+  const worldStateParsed = (saveData.world_state || []).map((i: string) =>
+    typeof i === "string" ? JSON.parse(i) : i
+  );
+
+  console.log("The parsed world state is ... ", worldStateParsed);
+
+  
+  setWorldState(Array.isArray(worldStateParsed) ? worldStateParsed : []);
 
   return data;
 };
