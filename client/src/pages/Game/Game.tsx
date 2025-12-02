@@ -28,7 +28,11 @@ export default function Game() {
 
   const pickUpItem = (itemName: string) => {
     if (inventory.length < 5) {
-      setInventory(prev => [...prev, { name: itemName }]);
+      setInventory(prev => {
+        const newInventory = [...prev, { name: itemName }];
+        console.log("Inventory has been updated! It's now ... ", newInventory);
+        return newInventory;
+      });
     }
   };
 
@@ -83,7 +87,7 @@ export default function Game() {
       body: JSON.stringify({ name, inventory, world_state: worldState }),
     });
 
-    console.log("whats being sent, ", JSON.stringify({ name, inventory, worldState }))
+    console.log("whats being sent, ", JSON.stringify({ name, inventory, world_state: worldState }))
 
     console.log("Username being sent: ", name)
 

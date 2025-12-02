@@ -45,13 +45,21 @@ const signIn = async (name: string) => {
     `${BASE_URL}/game/inventory?name=${encodeURIComponent(name)}`
   );
 
+
   const inventoryData = await inventoryRes.json();
+  console.log("Here's the inventory data: ", inventoryData);
+  const inventoryParsed = (inventoryData.inventory || []).map((i: string) =>
+    typeof i === "string" ? JSON.parse(i) : i
+  );
+
+  console.log("The parsed inventory is ... ", inventoryParsed);
+
 
   if (!inventoryRes.ok) {
     throw new Error(inventoryData.error || "Failed to load inventory");
   }
 
-  setInventory(inventoryData.inventory || []); 
+  setInventory(inventoryParsed || []); 
 
 
   // Part 3, loading save state
@@ -66,8 +74,17 @@ const signIn = async (name: string) => {
   if (!saveRes.ok) {
     throw new Error(data.error || "Failed to load save state");
   }
+
+  console.log("Raw worldState from DB:", saveData);
+
+  const worldStateParsed = (saveData.world_state || []).map((i: string) =>
+    typeof i === "string" ? JSON.parse(i) : i
+  );
+
+  console.log("The parsed world state is ... ", worldStateParsed);
+
   
-  setWorldState(saveData)
+  setWorldState(Array.isArray(worldStateParsed) ? worldStateParsed : []);
 
   return data;
 };
