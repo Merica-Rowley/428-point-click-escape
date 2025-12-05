@@ -60,7 +60,7 @@ export default function AuthButtons() {
         Signed in as <strong>{user?.username}</strong>
       </p>
       <div style={{ display: "flex", gap: "0.5rem" }}>
-        <button>Save</button>
+        {/* <button>Save</button> */}
         <button onClick={signOut}>Sign out</button>
       </div>
     </div>
