@@ -60,8 +60,9 @@ export default function GameScreen(props: {
       temperatures[0] === 78 &&
       temperatures[1] === 62
     ) {
+      console.log("YOU TRIGGERED THE THING!!!");
       props.toggleWorldFlag("correctTemperaturesSet");
-    }
+    } else console.log("no");
   }, [temperatures]);
 
   const checkWorldFlag = (flagName: string) => {
