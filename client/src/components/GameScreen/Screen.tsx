@@ -284,25 +284,30 @@ export default function GameScreen(props: {
               onClick={() => props.toggleWorldFlag("trapdoorShown")}
             ></button>
           )}
-          <button
-            className="doorButton"
-            onClick={() => handleDoorClick()}
-          ></button>
 
-          <button className="goRight" onClick={() => handleGoRight()}>
-            <img src={arrow} className="arrow-right" alt="right-arrow" />
-          </button>
+          {checkWorldFlag("victory") ? null : (
+            <>
+              <button
+                className="doorButton"
+                onClick={() => handleDoorClick()}
+              ></button>
 
-          <button className="goLeft" onClick={() => handleGoLeft()}>
-            <img src={arrow} className="arrow-left" alt="left-arrow" />
-          </button>
+              <button className="goRight" onClick={() => handleGoRight()}>
+                <img src={arrow} className="arrow-right" alt="right-arrow" />
+              </button>
 
-          <button
-            className="thermostatDoorButton"
-            onClick={() => handleThermostatClick()}
-          ></button>
+              <button className="goLeft" onClick={() => handleGoLeft()}>
+                <img src={arrow} className="arrow-left" alt="left-arrow" />
+              </button>
 
-          {showWin && <h1 className="win-text">YOU WIN</h1>}
+              <button
+                className="thermostatDoorButton"
+                onClick={() => handleThermostatClick()}
+              ></button>
+            </>
+          )}
+
+          {/* {showWin && <h1 className="win-text">YOU WIN</h1>} */}
         </div>
       );
     case 10: // trapdoor
