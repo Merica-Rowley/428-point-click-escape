@@ -20,7 +20,7 @@
 
   .game-window {
     flex: 11;
-    background-color: red;
+    background-color: transparent;
     /* Limit size */
     max-height: 75vh;
     aspect-ratio: 16 / 9;
