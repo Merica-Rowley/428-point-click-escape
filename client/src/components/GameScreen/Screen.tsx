@@ -38,8 +38,6 @@ export default function GameScreen(props: {
   selectedItem: string;
   toggleWorldFlag: (flagName: string) => void;
 }) {
-  const [showWin, setShowWin] = useState(false);
-
   const [screenIndex, setScreenIndex] = useState(0);
 
   const [temperatures, setTemperatures] = useState([72, 72, 72]);
@@ -75,7 +73,6 @@ export default function GameScreen(props: {
   const handleDoorClick = () => {
     if (props.selectedItem === "key") {
       props.toggleWorldFlag("victory");
-      setShowWin(true);
       props.removeItem("key");
     }
   };
