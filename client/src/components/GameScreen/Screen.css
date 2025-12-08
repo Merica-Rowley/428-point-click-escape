@@ -187,6 +187,11 @@
     text-align: center;
   }
 
+  .thermostatIndexIndicator {
+    opacity: 75%;
+    padding: 2% 3%;
+  }
+
   .desk {
     top: 60%;
     left: 27%;

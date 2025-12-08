@@ -26,6 +26,9 @@ import b1sound from "../../assets/Screen8/sounds/b.wav";
 import c2sound from "../../assets/Screen8/sounds/c2.wav";
 import hole from "../../assets/Screen3/holeinthewall.png";
 import button from "../../assets/button.png";
+import thermo0 from "../../assets/Thermostat/thermo-0.png";
+import thermo1 from "../../assets/Thermostat/thermo-1.png";
+import thermo2 from "../../assets/Thermostat/thermo-2.png";
 
 export default function GameScreen(props: {
   inventory: item[];
@@ -506,6 +509,13 @@ export default function GameScreen(props: {
         </div>
       );
     case 5: // thermostat screen
+      let currentThermoIndicatorSrc = thermo0;
+      if (currentThermostatIndex === 1) {
+        currentThermoIndicatorSrc = thermo1;
+      } else if (currentThermostatIndex === 2) {
+        currentThermoIndicatorSrc = thermo2;
+      }
+
       return (
         <>
           <div className={`background-container screen-thermostat-bg`}>
@@ -521,6 +531,9 @@ export default function GameScreen(props: {
             <button className="getOut" onClick={() => handleGetOutClick()}>
               <img src={arrow} className="arrow-down" alt="back-arrow" />
             </button>
+            <div className="thermostatIndexIndicator">
+              <img src={currentThermoIndicatorSrc} alt="indicator" />
+            </div>
           </div>
         </>
       );
