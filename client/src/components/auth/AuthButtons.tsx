@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "./AuthProvider";
+import "./AuthButtons.css";
 
 export default function AuthButtons() {
   const { isAuthenticated, user, signIn, signOut, register } = useAuth();
@@ -71,6 +72,7 @@ export default function AuthButtons() {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Enter your name"
+        className="nameInput"
       />
       <button onClick={handleSignIn}>Sign in</button>
       <button onClick={handleRegister}>Register</button>

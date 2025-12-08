@@ -6,3 +6,28 @@ button {
   align-items: center;
   display: flex;
 }
+
+.nameInput {
+  padding: 0.4rem 0.8rem;
+  font-size: 16px;
+  border-radius: 8px;
+
+  background-color: #fde8e2; /* light */
+  color: #2b2524; /* dark text */
+
+  border: 1px solid #2b2524; /* same border as button */
+  outline: none;
+
+  transition: border-color 0.25s, box-shadow 0.25s;
+  margin-right: 10px;
+}
+
+.nameInput::placeholder {
+  color: #442e29; /* shade — subtle */
+  opacity: 0.7;
+}
+
+.nameInput:focus {
+  border-color: #863a28; /* primary */
+  box-shadow: 0 0 4px rgba(134, 58, 40, 0.4);
+}
