@@ -3,7 +3,7 @@ import key from "../../assets/Screen1/key.png";
 import screwdriver from "../../assets/Screen3/screwdriver.png";
 import lightbulb from "../../assets/Screen3/lightbulb.png";
 import button from "../../assets/button.png";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import "./Inventory.css";
 
 export default function Inventory(props: {
