@@ -1,6 +1,5 @@
 import knexModule, { Knex } from "knex";
 import * as rawKnexConfig from "../../knexfile"; // works with TS/JS knexfile
-import { id } from "../../jest.config";
 
 // Normalize the import so it works whether the knexfile uses `export default` (ESM)
 // or `module.exports` (CommonJS). Some environments (ts-jest) need
@@ -39,11 +38,13 @@ describe("Auth Table", () => {
     });
 
     // 🔹 Fetch directly from DB to double check
-    const fetched = await knex("auth_table").where({ username: "test_user" }).first();
+    const fetched = await knex("auth_table")
+      .where({ username: "test_user" })
+      .first();
 
     expect(fetched).toMatchObject({
       id: 1,
       username: "test_user",
     });
-    });
   });
+});
