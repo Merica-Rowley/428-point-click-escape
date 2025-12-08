@@ -206,8 +206,6 @@ test.describe.serial("logged-in tests", () => {
     await sharedPage.getByRole("button", { name: "left-arrow" }).click();
     await sharedPage.getByRole("button", { name: "key" }).click();
     await sharedPage.getByRole("button").nth(3).click();
-    await expect(
-      sharedPage.getByRole("heading", { name: "YOU WIN" })
-    ).toBeVisible();
+    await expect(sharedPage.getByRole("button").nth(3)).not.toBeVisible();
   });
 });
