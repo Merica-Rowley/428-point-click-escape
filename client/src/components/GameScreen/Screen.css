@@ -19,9 +19,10 @@
   }
 
   .doorButton {
-    top: 43%;
-    left: 40%;
-    opacity: 0;
+    top: 19%;
+    left: 39%;
+    width: 22%;
+    height: 78%;
   }
 
   .lightbulbButton {
@@ -60,7 +61,6 @@
     left: 85%;
     width: 10%;
     height: 13%;
-    /* background-color: blue; */
   }
 
   .lavaLampButton {
@@ -68,43 +68,59 @@
     left: 77.5%;
     width: 10%;
     height: 37%;
-    /* background-color: purple; */
   }
 
   .trapDoorButton {
-    top: 92%;
+    top: 90%;
     left: 16.5%;
     width: 20%;
     height: 7%;
-    background-color: green;
+    padding: 0;
+  }
+
+  .trapDoorButton img {
+    width: 100%;
+    height: 200%;
   }
 
   .passWord {
     position: absolute;
-    top: 56%;
+    top: 40%;
     left: 42.5%;
     width: 15%;
     height: 8%;
-    background-color: grey;
+    background-color: #f5f5f5;
+    font-family: "Share Tech Mono", monospace;
+
+    border: 3px solid #000;
+    border-radius: 8px;
+    padding: 0 10px;
+
+    outline: none;
   }
 
   .redButton {
     position: absolute;
-    top: 50%;
-    left: 10%;
-    width: 5%;
-    height: 10%;
-    /* background-color: red; */
+    top: 45%;
+    left: 45.5%;
+    width: 7%;
+    height: 12%;
   }
 
   .submitPassWord {
     position: absolute;
-    top: 66%;
+    top: 50%;
     left: 42.5%;
     width: 15%;
     height: 8%;
     background-color: black;
     color: white;
+    font-family: "Share Tech Mono", monospace;
+    letter-spacing: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1.15em;
   }
 
   .thermostatFireplaceButton {
@@ -112,7 +128,6 @@
     left: 4.5%;
     width: 10%;
     height: 13%;
-    /* background-color: forestgreen; */
   }
 
   .goRight {
@@ -324,8 +339,15 @@
   }
 
   .paintingButton {
-    left: 32%;
-    top: 0%;
+    left: 29%;
+    top: -1%;
+    height: 34%;
+    width: 40%;
+  }
+
+  .paintingButton img {
+    width: 100%;
+    height: 100%;
   }
 
   .dropped-painting {
@@ -516,6 +538,10 @@
 
 .screen-ten-bg-one {
   background-image: url("../../assets/Screen10/screen-ten-bg-one.png");
+}
+
+.screen-ten-bg-zero {
+  background-image: url("../../assets/Screen10/screen-ten-bg-closed.png");
 }
 
 .win-text {

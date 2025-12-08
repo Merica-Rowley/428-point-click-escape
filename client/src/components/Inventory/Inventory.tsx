@@ -3,7 +3,7 @@ import key from "../../assets/Screen1/key.png";
 import screwdriver from "../../assets/Screen3/screwdriver.png";
 import lightbulb from "../../assets/Screen3/lightbulb.png";
 import button from "../../assets/button.png";
-import { useState } from "react";
+import { useState, useEffect, use } from "react";
 import "./Inventory.css";
 
 export default function Inventory(props: {
@@ -11,6 +11,11 @@ export default function Inventory(props: {
   selectItem: (item: string) => void;
 }) {
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+
+  useEffect(() => {
+    // Reset selected index if inventory changes
+    setSelectedIndex(-1);
+  }, [props.inventory]);
 
   const inventorySelect = (itemName: string, index: number) => {
     props.selectItem(itemName);
@@ -25,10 +30,6 @@ export default function Inventory(props: {
         return <img src={screwdriver} alt="screwdriver" />;
       case "lightbulb":
         return <img src={lightbulb} alt="lightbulb" />;
-      // case "drawer-button":
-      //   return <img src={button} alt="button" />;
-      // case "piano-button":
-      //   return <img src={button} alt="button" />;
       case "button":
         return <img src={button} alt="button" />;
       default:

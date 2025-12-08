@@ -19,7 +19,7 @@ export type worldFlag = {
 
 export default function Game() {
   const { inventory, setInventory, worldState, setWorldState } = useGame();
-  const [selectedItem, setSelectedItem] = useState<string>(""); 
+  const [selectedItem, setSelectedItem] = useState<string>("");
   const { user } = useAuth();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Game() {
 
   const pickUpItem = (itemName: string) => {
     if (inventory.length < 5) {
-      setInventory(prev => {
+      setInventory((prev) => {
         const newInventory = [...prev, { name: itemName }];
         console.log("Inventory has been updated! It's now ... ", newInventory);
         return newInventory;
